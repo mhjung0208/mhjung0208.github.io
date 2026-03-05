@@ -29,12 +29,17 @@ function renderAbout(data) {
   const info = document.getElementById("about-info");
   if (!info) return;
 
+  const university = data.educationUniversity || data.university || "";
+  const highSchool = data.educationHighSchool || data.highSchool || "";
+  const legacyEducation = data.education || "";
+
   const rows = [
     ["Name", data.name],
     ["Birth", data.birth],
     ["Address", data.address],
     ["Email", data.email],
-    ["Education", data.education]
+    ["University", university || legacyEducation],
+    ["High School", highSchool]
   ];
 
   info.innerHTML = "";
@@ -63,15 +68,25 @@ function renderCareer(items) {
     const li = document.createElement("li");
     const title = document.createElement("h3");
     const period = document.createElement("p");
-    const desc = document.createElement("p");
+    const descList = document.createElement("ul");
 
     title.textContent = `${item.company || ""} | ${item.role || ""}`;
     period.textContent = item.period || "";
-    desc.textContent = item.description || "";
+    descList.className = "career-desc";
+
+    const descriptions = Array.isArray(item.descriptions)
+      ? item.descriptions
+      : (item.description ? [item.description] : []);
+
+    descriptions.forEach((desc) => {
+      const descItem = document.createElement("li");
+      descItem.textContent = desc;
+      descList.appendChild(descItem);
+    });
 
     li.appendChild(title);
     li.appendChild(period);
-    li.appendChild(desc);
+    li.appendChild(descList);
     target.appendChild(li);
   });
 }

@@ -1,8 +1,9 @@
 ﻿{
   "photo": "",
-  "name": "Minjung",
-  "birth": "199X-XX-XX",
-  "address": "Seoul, Korea",
-  "email": "example@email.com",
-  "education": "OO University"
+  "name": "정민화 / Jung Min Hwa",
+  "birth": "1992-02-08",
+  "address": "서울시 강동구",
+  "email": "mhjung0208@gmail.com",
+  "educationUniversity": "OO University",
+  "educationHighSchool": ""
 }
