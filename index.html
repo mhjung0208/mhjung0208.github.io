@@ -3,15 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
+  <title>Minjung Portfolio</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --sub: #4b5563;
+      --point: #0f766e;
+      --line: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 35%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      width: min(960px, 92vw);
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    h1, h2 { margin: 0 0 12px; }
+
+    h1 { font-size: 2rem; }
+
+    h2 {
+      font-size: 1.35rem;
+      color: var(--point);
+    }
+
+    p { margin: 0 0 8px; color: var(--sub); }
+
+    .about {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .photo {
+      width: 120px;
+      height: 150px;
+      border: 1px dashed #9ca3af;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #6b7280;
+      font-size: 0.85rem;
+      background: #f9fafb;
+    }
+
+    .info { margin: 0; padding: 0; list-style: none; }
+
+    .info li {
+      padding: 6px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .chips li {
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: #155e75;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+
+    .projects { list-style: none; margin: 0; padding: 0; }
+
+    .projects li {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+
+    .project-name {
+      margin: 0 0 4px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-summary {
+      margin: 0;
+      color: var(--sub);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .about { grid-template-columns: 1fr; }
+      .photo { width: 100%; max-width: 180px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>안녕하세요, 민정님의 포트폴리오 테스트 페이지입니다.</h1>
-  <p>이 페이지는 GitHub Pages 배포 테스트용으로 만든 첫 HTML입니다.</p>
-  <ul>
-    <li>이름: Minjung</li>
-    <li>역할: Android Developer</li>
-    <li>연락처: example@email.com</li>
-  </ul>
+  <main class="wrap">
+    <section>
+      <h1>Android Developer Portfolio</h1>
+      <p>실무 중심의 앱 개발 경험과 프로젝트를 담은 포트폴리오입니다.</p>
+    </section>
+
+    <section>
+      <h2>About Me</h2>
+      <div class="about">
+        <div class="photo">증명사진</div>
+        <ul class="info">
+          <li><strong>Name:</strong> Minjung</li>
+          <li><strong>Birth:</strong> 199X-XX-XX</li>
+          <li><strong>Address:</strong> Seoul, Korea</li>
+          <li><strong>Email:</strong> example@email.com</li>
+          <li><strong>Education:</strong> OO University</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Introduce</h2>
+      <p>Android 앱 개발 경력과 실무에서 사용한 기술을 바탕으로 안정적인 사용자 경험을 만드는 개발자입니다.</p>
+    </section>
+
+    <section>
+      <h2>Career</h2>
+      <p>회사명 / 직무 / 기간을 이곳에 입력하세요.</p>
+    </section>
+
+    <section>
+      <h2>Stacks</h2>
+      <ul class="chips">
+        <li>Kotlin</li>
+        <li>Java</li>
+        <li>Android SDK</li>
+        <li>Jetpack</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Work Tools</h2>
+      <ul class="chips">
+        <li>Android Studio</li>
+        <li>GitHub</li>
+        <li>Figma</li>
+        <li>Notion</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <ul id="projects" class="projects"></ul>
+    </section>
+  </main>
+
+  <script>
+    function displayName(folder) {
+      return folder.replace(/^\d+\.\s*/, "").trim();
+    }
+
+    fetch("./Projects/projects.json")
+      .then((res) => res.json())
+      .then((items) => {
+        const target = document.getElementById("projects");
+
+        items
+          .sort((a, b) => a.folder.localeCompare(b.folder, "en", { numeric: true }))
+          .forEach((item) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <p class="project-name">${displayName(item.folder)}</p>
+              <p class="project-summary">${item.summary}</p>
+            `;
+            target.appendChild(li);
+          });
+      })
+      .catch(() => {
+        document.getElementById("projects").innerHTML = "<li>프로젝트 정보를 불러오지 못했습니다.</li>";
+      });
+  </script>
 </body>
 </html>
