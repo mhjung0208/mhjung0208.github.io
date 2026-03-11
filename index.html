@@ -6,232 +6,746 @@
   <title>Minjung Portfolio</title>
   <style>
     :root {
-      --bg-1: #f8fafc;
-      --bg-2: #eef2f7;
-      --card: rgba(255, 255, 255, 0.92);
-      --text: #1f2933;
-      --sub: #52606d;
-      --point: #1f6feb;
-      --line: rgba(15, 23, 42, 0.08);
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --bg: #f2ede4;
+      --paper: rgba(255, 251, 245, 0.78);
+      --paper-strong: rgba(255, 251, 245, 0.94);
+      --ink: #1a1f1d;
+      --muted: #5e625c;
+      --accent: #bf5a36;
+      --line: rgba(26, 31, 29, 0.09);
+      --shadow: 0 18px 40px rgba(78, 61, 43, 0.08);
+      --radius: 28px;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", "Segoe UI", sans-serif;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      line-height: 1.65;
       background:
-        radial-gradient(circle at 10% 10%, #ffffff 0%, transparent 38%),
-        radial-gradient(circle at 88% 12%, #e9f2ff 0%, transparent 32%),
-        linear-gradient(165deg, var(--bg-1), var(--bg-2));
-      color: var(--text);
-      line-height: 1.6;
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.92) 0, transparent 28%),
+        radial-gradient(circle at 85% 8%, rgba(243, 214, 203, 0.7) 0, transparent 24%),
+        linear-gradient(180deg, #f7f1e7 0%, #efe7dc 100%);
       min-height: 100vh;
-      position: relative;
     }
 
-    body::before {
+    body::before,
+    body::after {
       content: "";
       position: fixed;
-      inset: -120px auto auto -120px;
-      width: 320px;
-      height: 320px;
-      background: rgba(66, 153, 225, 0.14);
-      filter: blur(70px);
       border-radius: 50%;
+      filter: blur(90px);
       z-index: -1;
     }
 
-    .wrap {
-      width: min(960px, 92vw);
+    body::before {
+      width: 300px;
+      height: 300px;
+      background: rgba(191, 90, 54, 0.12);
+      top: 12%;
+      left: -80px;
+    }
+
+    body::after {
+      width: 340px;
+      height: 340px;
+      background: rgba(112, 140, 126, 0.14);
+      right: -120px;
+      bottom: 5%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 40px));
       margin: 0 auto;
-      padding: 44px 0 84px;
+      padding: 28px 0 80px;
     }
 
-    section {
-      background: var(--card);
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.8fr);
+      gap: 24px;
+      padding: 34px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 26px;
-      margin-bottom: 14px;
+      border-radius: 36px;
+      background: linear-gradient(140deg, var(--paper-strong), rgba(255, 248, 239, 0.9));
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      backdrop-filter: blur(12px);
     }
 
-    section:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -120px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 90, 54, 0.16) 0, transparent 68%);
+      pointer-events: none;
     }
 
-    h1, h2, h3 { margin: 0 0 12px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(26, 31, 29, 0.08);
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-    h1 {
-      font-size: clamp(1.7rem, 2.6vw, 2.2rem);
-      letter-spacing: -0.02em;
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(191, 90, 54, 0.12);
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero-copy p {
+      max-width: 56ch;
+      font-size: 1.02rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+    }
+
+    .button {
+      background: var(--ink);
+      color: #fffaf4;
+    }
+
+    .ghost-button {
+      background: rgba(255, 255, 255, 0.55);
+      border-color: rgba(26, 31, 29, 0.12);
+    }
+
+    .hero-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(37, 34, 31, 0.95);
+      color: #f7f2ea;
+      min-width: 0;
+    }
+
+    .hero-panel p,
+    .hero-panel span {
+      color: rgba(247, 242, 234, 0.76);
+    }
+
+    .meta-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #fffaf4;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 20px;
+      margin-top: 22px;
+      align-items: start;
+    }
+
+    .side-nav {
+      position: sticky;
+      top: 20px;
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255, 251, 245, 0.68);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .side-nav a:hover {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      transform: translateX(2px);
+    }
+
+    .content {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-number {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     h2 {
-      font-size: 1.25rem;
-      color: var(--point);
-      letter-spacing: -0.01em;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
     }
 
-    p { margin: 0 0 8px; color: var(--sub); }
+    .section-head p {
+      max-width: 42ch;
+      font-size: 0.95rem;
+    }
 
-    .about {
+    .about-grid {
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 20px;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
       align-items: start;
+    }
+
+    .photo-shell {
+      position: relative;
+      padding: 14px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 246, 237, 0.7));
+      border: 1px solid var(--line);
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-shell::after {
+      content: "profile";
+      position: absolute;
+      inset: 16px 16px auto auto;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(26, 31, 29, 0.35);
     }
 
     .photo-box,
     .photo {
-      width: 120px;
-      height: 150px;
-      border-radius: 8px;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
     }
 
     .photo-box {
-      border: 1px dashed #9ca3af;
       display: grid;
       place-items: center;
-      color: #6b7280;
-      font-size: 0.85rem;
-      background: #f9fafb;
+      border: 1px dashed rgba(26, 31, 29, 0.22);
+      color: rgba(26, 31, 29, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(243, 214, 203, 0.35)),
+        repeating-linear-gradient(
+          45deg,
+          transparent 0,
+          transparent 16px,
+          rgba(26, 31, 29, 0.03) 16px,
+          rgba(26, 31, 29, 0.03) 17px
+        );
+      font-size: 0.92rem;
     }
 
     .photo {
-      object-fit: cover;
-      border: 1px solid #e5e7eb;
       display: none;
+      object-fit: cover;
+      border: 1px solid rgba(26, 31, 29, 0.08);
     }
 
-    .info { margin: 0; padding: 0; list-style: none; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-    .info li {
-      padding: 6px 0;
-      border-bottom: 1px solid #f3f4f6;
+    .info-grid li {
+      min-height: 92px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(26, 31, 29, 0.06);
+    }
+
+    .info-grid strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .info-grid span {
+      display: block;
+      color: var(--muted);
+      word-break: break-word;
+    }
+
+    .intro-copy {
+      font-size: 1.12rem;
+      max-width: 60ch;
+      white-space: pre-line;
+    }
+
+    .career-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .career-list li {
+      position: relative;
+      padding: 22px 22px 22px 26px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(26, 31, 29, 0.06);
+      overflow: hidden;
+    }
+
+    .career-list li::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--accent), rgba(191, 90, 54, 0.2));
+    }
+
+    .career-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .career-header h3 {
+      margin: 0 0 4px;
+      font-size: 1.12rem;
+    }
+
+    .career-period {
+      white-space: nowrap;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    .career-desc {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 8px;
+    }
+
+    .skill-cluster {
+      display: grid;
+      gap: 12px;
     }
 
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
+      list-style: none;
       padding: 0;
       margin: 0;
-      list-style: none;
     }
 
     .chips li {
-      background: #f4f8ff;
-      border: 1px solid #d3e2ff;
-      color: #2f4f8f;
+      padding: 10px 14px;
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(26, 31, 29, 0.08);
+      font-size: 0.94rem;
+      color: var(--ink);
+      box-shadow: inset 0 -1px 0 rgba(26, 31, 29, 0.03);
     }
 
-    .career { list-style: none; margin: 0; padding: 0; }
-
-    .career li {
-      border-left: 3px solid #dbeafe;
-      padding: 8px 0 8px 12px;
-      margin-bottom: 8px;
+    .project-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 16px;
     }
 
-    .career h3 {
-      margin-bottom: 4px;
-      font-size: 1rem;
-      color: #1e3a8a;
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.7fr);
+      gap: 18px;
+      padding: 22px;
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 236, 0.76)),
+        rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(26, 31, 29, 0.08);
     }
 
-    .career-desc {
-      margin: 6px 0 0;
-      padding-left: 18px;
-      color: var(--sub);
+    .project-card:nth-child(2n) {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(235, 241, 237, 0.82)),
+        rgba(255, 255, 255, 0.7);
     }
 
-    .career-desc li {
-      margin-bottom: 4px;
-    }
-
-    .projects { list-style: none; margin: 0; padding: 0; }
-
-    .projects li {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px 14px;
+    .project-kicker {
+      display: inline-block;
       margin-bottom: 10px;
-      background: #fcfdff;
+      color: var(--accent);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .project-name {
-      margin: 0 0 4px;
-      font-weight: 700;
-      color: var(--text);
+      margin: 0 0 8px;
+      font-size: 1.36rem;
+      line-height: 1.15;
+      color: var(--ink);
     }
 
     .project-summary {
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
       margin: 0;
-      color: var(--sub);
-      font-size: 0.95rem;
     }
 
+    .project-tags li {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(26, 31, 29, 0.06);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .project-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(26, 31, 29, 0.04);
+      border: 1px solid rgba(26, 31, 29, 0.06);
+    }
+
+    .project-side strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-path {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
+    .empty,
     .error {
-      color: #b91c1c;
-      font-size: 0.95rem;
+      color: #8a3f27;
     }
 
-    @media (max-width: 640px) {
-      .about { grid-template-columns: 1fr; }
-      .photo-box, .photo { width: 100%; max-width: 180px; }
-      section { padding: 20px; }
+    @media (max-width: 980px) {
+      .hero,
+      .layout,
+      .about-grid,
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .side-nav {
+        position: static;
+      }
+
+      .side-nav ul {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 20px, 1180px);
+        padding-top: 10px;
+      }
+
+      .hero,
+      .panel {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .section-head,
+      .career-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .info-grid,
+      .side-nav ul {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.3rem, 14vw, 4rem);
+      }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section>
-      <h1 id="title-main">Loading...</h1>
-      <p id="title-sub"></p>
-    </section>
-
-    <section>
-      <h2>About Me</h2>
-      <div class="about">
-        <div id="photo-box" class="photo-box">증명사진</div>
-        <img id="about-photo" class="photo" alt="증명사진" />
-        <ul id="about-info" class="info"></ul>
+  <main class="page">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <span class="eyebrow">Developer Portfolio</span>
+        <h1 id="title-main">Loading...</h1>
+        <p id="title-sub"></p>
+        <div class="hero-actions">
+          <a class="button" href="#projects">View Projects</a>
+          <a class="ghost-button" href="#about">About Me</a>
+        </div>
       </div>
+      <aside class="hero-panel">
+        <div>
+          <span class="meta-label">Current Focus</span>
+          <p id="hero-focus">Mobile development, shipping, and stable user experience.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong id="career-count">0</strong>
+            <span>Career Entries</span>
+          </div>
+          <div class="stat">
+            <strong id="stack-count">0</strong>
+            <span>Core Stacks</span>
+          </div>
+          <div class="stat">
+            <strong id="project-count">0</strong>
+            <span>Selected Projects</span>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <section>
-      <h2>Introduce</h2>
-      <p id="introduce-text"></p>
-    </section>
+    <div class="layout">
+      <nav class="side-nav" aria-label="Section Navigation">
+        <ul>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#introduce">Introduce</a></li>
+          <li><a href="#career">Career</a></li>
+          <li><a href="#stacks">Stacks</a></li>
+          <li><a href="#tools">Work Tools</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </nav>
 
-    <section>
-      <h2>Career</h2>
-      <ul id="career-list" class="career"></ul>
-    </section>
+      <div class="content">
+        <section class="panel" id="about">
+          <div class="section-head">
+            <div>
+              <span class="section-number">01 / About Me</span>
+              <h2>Background & identity</h2>
+            </div>
+            <p>기본 정보를 한 번에 읽기 쉽게 정리한 소개 섹션입니다.</p>
+          </div>
+          <div class="about-grid">
+            <div class="photo-shell">
+              <div id="photo-box" class="photo-box">증명사진</div>
+              <img id="about-photo" class="photo" alt="증명사진" />
+            </div>
+            <ul id="about-info" class="info-grid"></ul>
+          </div>
+        </section>
 
-    <section>
-      <h2>Stacks</h2>
-      <ul id="stacks-list" class="chips"></ul>
-    </section>
+        <section class="panel" id="introduce">
+          <div class="section-head">
+            <div>
+              <span class="section-number">02 / Introduce</span>
+              <h2>Short introduction</h2>
+            </div>
+            <p>한두 문단만 읽어도 경력 방향과 강점이 전달되도록 구성했습니다.</p>
+          </div>
+          <p id="introduce-text" class="intro-copy"></p>
+        </section>
 
-    <section>
-      <h2>Work Tools</h2>
-      <ul id="tools-list" class="chips"></ul>
-    </section>
+        <section class="panel" id="career">
+          <div class="section-head">
+            <div>
+              <span class="section-number">03 / Career</span>
+              <h2>Experience timeline</h2>
+            </div>
+            <p>회사, 역할, 기간, 상세 기여를 타임라인 카드처럼 보이게 재구성했습니다.</p>
+          </div>
+          <ul id="career-list" class="career-list"></ul>
+        </section>
 
-    <section>
-      <h2>Projects</h2>
-      <ul id="projects" class="projects"></ul>
-    </section>
+        <section class="panel" id="stacks">
+          <div class="section-head">
+            <div>
+              <span class="section-number">04 / Stacks</span>
+              <h2>Core technology</h2>
+            </div>
+            <p>실무에서 반복적으로 사용한 기술을 읽기 좋은 태그 형태로 노출합니다.</p>
+          </div>
+          <div class="skill-cluster">
+            <ul id="stacks-list" class="chips"></ul>
+          </div>
+        </section>
+
+        <section class="panel" id="tools">
+          <div class="section-head">
+            <div>
+              <span class="section-number">05 / Work Tools</span>
+              <h2>Workflow & tools</h2>
+            </div>
+            <p>협업과 운영 경험을 함께 보여줄 수 있도록 툴을 별도 섹션으로 분리했습니다.</p>
+          </div>
+          <div class="skill-cluster">
+            <ul id="tools-list" class="chips"></ul>
+          </div>
+        </section>
+
+        <section class="panel" id="projects">
+          <div class="section-head">
+            <div>
+              <span class="section-number">06 / Projects</span>
+              <h2>Selected work</h2>
+            </div>
+            <p>프로젝트별 이름과 요약, 실제 폴더 기준 정보를 함께 보여주는 카드 레이아웃입니다.</p>
+          </div>
+          <ul id="projects-list" class="project-list"></ul>
+        </section>
+      </div>
+    </div>
   </main>
 
   <script src="./app.js"></script>

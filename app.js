@@ -13,6 +13,13 @@ function setText(id, value) {
   }
 }
 
+function setCount(id, value) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = String(value ?? 0);
+  }
+}
+
 function appendChipList(targetId, items) {
   const target = document.getElementById(targetId);
   if (!target) return;
@@ -45,7 +52,7 @@ function renderAbout(data) {
   info.innerHTML = "";
   rows.forEach(([label, value]) => {
     const li = document.createElement("li");
-    li.innerHTML = `<strong>${label}:</strong> ${value || ""}`;
+    li.innerHTML = `<strong>${label}</strong><span>${value || ""}</span>`;
     info.appendChild(li);
   });
 
@@ -66,11 +73,16 @@ function renderCareer(items) {
   target.innerHTML = "";
   (items || []).forEach((item) => {
     const li = document.createElement("li");
+    const header = document.createElement("div");
     const title = document.createElement("h3");
     const period = document.createElement("p");
     const descList = document.createElement("ul");
 
-    title.textContent = `${item.company || ""} | ${item.role || ""}`;
+    header.className = "career-header";
+    period.className = "career-period";
+    title.textContent = item.role
+      ? `${item.company || ""} | ${item.role}`
+      : (item.company || "");
     period.textContent = item.period || "";
     descList.className = "career-desc";
 
@@ -84,8 +96,9 @@ function renderCareer(items) {
       descList.appendChild(descItem);
     });
 
-    li.appendChild(title);
-    li.appendChild(period);
+    header.appendChild(title);
+    header.appendChild(period);
+    li.appendChild(header);
     li.appendChild(descList);
     target.appendChild(li);
   });
@@ -96,7 +109,7 @@ function displayProjectName(folder) {
 }
 
 function renderProjects(items) {
-  const target = document.getElementById("projects");
+  const target = document.getElementById("projects-list");
   if (!target) return;
 
   target.innerHTML = "";
@@ -104,19 +117,57 @@ function renderProjects(items) {
     .sort((a, b) => (a.folder || "").localeCompare(b.folder || "", "en", { numeric: true }))
     .forEach((item) => {
       const li = document.createElement("li");
-      const name = document.createElement("p");
+      const content = document.createElement("div");
+      const side = document.createElement("div");
+      const kicker = document.createElement("span");
+      const name = document.createElement("h3");
       const summary = document.createElement("p");
+      const tags = document.createElement("ul");
+      const pathWrap = document.createElement("div");
+      const pathLabel = document.createElement("strong");
+      const path = document.createElement("p");
 
+      li.className = "project-card";
+      content.className = "project-main";
+      side.className = "project-side";
+      kicker.className = "project-kicker";
       name.className = "project-name";
-      name.textContent = displayProjectName(item.folder);
-
       summary.className = "project-summary";
+      tags.className = "project-tags";
+      path.className = "project-path";
+
+      kicker.textContent = "Case Study";
+      name.textContent = displayProjectName(item.folder);
       summary.textContent = item.summary || "";
 
-      li.appendChild(name);
-      li.appendChild(summary);
+      ["Portfolio", "Selected Work"].forEach((label) => {
+        const tag = document.createElement("li");
+        tag.textContent = label;
+        tags.appendChild(tag);
+      });
+
+      pathLabel.textContent = "Source Folder";
+      path.textContent = `Projects/${item.folder || ""}`;
+
+      content.appendChild(kicker);
+      content.appendChild(name);
+      content.appendChild(summary);
+      content.appendChild(tags);
+      pathWrap.appendChild(pathLabel);
+      pathWrap.appendChild(path);
+      side.appendChild(pathWrap);
+      li.appendChild(content);
+      li.appendChild(side);
       target.appendChild(li);
     });
+}
+
+function setHeroFocus(text) {
+  const heroFocus = document.getElementById("hero-focus");
+  if (!heroFocus) return;
+
+  const firstSentence = (text || "").split("\n")[0].trim();
+  heroFocus.textContent = firstSentence || "Mobile development, shipping, and stable user experience.";
 }
 
 async function init() {
@@ -134,6 +185,10 @@ async function init() {
     setText("title-main", title.headline);
     setText("title-sub", title.subheadline);
     setText("introduce-text", introduce.text);
+    setHeroFocus(introduce.text);
+    setCount("career-count", career.items?.length || 0);
+    setCount("stack-count", stacks.items?.length || 0);
+    setCount("project-count", projects.length || 0);
 
     renderAbout(about);
     renderCareer(career.items);
