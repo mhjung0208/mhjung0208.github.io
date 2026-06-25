@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "홍길동 | Frontend Developer",
+    "description": "프론트엔드 개발자 홍길동의 웹 이력서입니다.",
+    "ogImage": ""
+  },
+  "hero": {
+    "name": "홍길동",
+    "nameEn": "GilDong",
+    "title": "Frontend Developer",
+    "subtitle": "사용자 경험을 중심으로 생각하는 프론트엔드 개발자입니다.",
+    "resumeUrl": "#"
+  },
+  "about": {
+    "description": "안녕하세요, 프론트엔드 개발자 홍길동입니다. 사용자 중심의 직관적인 인터페이스를 만드는 것에 열정을 가지고 있습니다. 깔끔한 코드와 효율적인 설계를 지향하며, 새로운 기술을 배우는 것을 즐깁니다.",
+    "highlights": [
+      "3년차 프론트엔드 개발자",
+      "React, Vue.js 기반 SPA 개발 경험",
+      "UI/UX에 대한 깊은 관심과 이해",
+      "팀 협업 및 코드 리뷰 문화 중시"
+    ]
+  },
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": [
+        { "name": "HTML/CSS", "level": 90 },
+        { "name": "JavaScript", "level": 85 },
+        { "name": "TypeScript", "level": 75 },
+        { "name": "React", "level": 80 },
+        { "name": "Vue.js", "level": 70 }
+      ]
+    },
+    {
+      "category": "Backend",
+      "items": [
+        { "name": "Node.js", "level": 65 },
+        { "name": "Python", "level": 60 },
+        { "name": "MySQL", "level": 55 }
+      ]
+    },
+    {
+      "category": "Tools",
+      "items": [
+        { "name": "Git", "level": 85 },
+        { "name": "Docker", "level": 50 },
+        { "name": "Figma", "level": 60 },
+        { "name": "AWS", "level": 45 }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "(주) 테크컴퍼니",
+      "role": "프론트엔드 개발자",
+      "period": "2023.03 - 현재",
+      "description": "B2B SaaS 플랫폼의 프론트엔드 개발을 담당하고 있습니다.",
+      "highlights": [
+        "React 기반 대시보드 UI 설계 및 개발",
+        "공통 컴포넌트 라이브러리 구축",
+        "페이지 로딩 속도 40% 개선"
+      ]
+    },
+    {
+      "company": "(주) 스타트업",
+      "role": "주니어 프론트엔드 개발자",
+      "period": "2021.06 - 2023.02",
+      "description": "모바일 커머스 서비스의 웹 프론트엔드를 개발했습니다.",
+      "highlights": [
+        "Vue.js 기반 모바일 웹 앱 개발",
+        "결제 연동 및 주문 플로우 구현",
+        "반응형 디자인 적용"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "개인 블로그 플랫폼",
+      "description": "마크다운 기반의 개인 기술 블로그를 직접 설계하고 개발한 프로젝트입니다.",
+      "techs": ["React", "Next.js", "TailwindCSS", "MDX"],
+      "githubUrl": "https://github.com/username/blog",
+      "demoUrl": "https://blog.example.com",
+      "image": ""
+    },
+    {
+      "name": "할 일 관리 앱",
+      "description": "드래그 앤 드롭 기반의 칸반 보드 스타일 할 일 관리 애플리케이션입니다.",
+      "techs": ["Vue.js", "Vuex", "Firebase"],
+      "githubUrl": "https://github.com/username/todo-app",
+      "demoUrl": "",
+      "image": ""
+    },
+    {
+      "name": "날씨 대시보드",
+      "description": "OpenWeather API를 활용한 실시간 날씨 정보 대시보드입니다.",
+      "techs": ["JavaScript", "Chart.js", "REST API"],
+      "githubUrl": "https://github.com/username/weather",
+      "demoUrl": "",
+      "image": ""
+    }
+  ],
+  "education": [
+    {
+      "school": "한국대학교",
+      "major": "컴퓨터공학과",
+      "period": "2017.03 - 2021.02",
+      "description": "학사 졸업"
+    }
+  ],
+  "contact": {
+    "email": "example@email.com",
+    "github": "https://github.com/username",
+    "linkedin": "https://linkedin.com/in/username",
+    "blog": ""
+  }
+}

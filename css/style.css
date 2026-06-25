@@ -1,0 +1,13 @@
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 4rem;
+}
+
+.nav-link.active,
+.mobile-nav-link.active {
+  color: #2563eb;
+  font-weight: 600;
+}
