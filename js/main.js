@@ -79,7 +79,7 @@ function renderHero(hero, projects) {
 
     <div class="relative">
       <!-- 캐릭터 이미지 — 우측 하단 고정, 크게 -->
-      <div class="hidden lg:block absolute right-0 bottom-0 w-[55%] z-0 pointer-events-none">
+      <div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[55%] z-0 pointer-events-none">
         ${profileImageHtml}
       </div>
 
@@ -125,8 +125,8 @@ function renderAbout(about) {
     .join('');
 
   const profileImageHtml = about.profileImage
-    ? `<img src="${about.profileImage}" alt="프로필 사진" class="w-48 h-48 rounded-2xl object-cover" loading="lazy">`
-    : `<div class="w-48 h-48 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+    ? `<img src="${about.profileImage}" alt="프로필 사진" class="w-52 h-64 rounded-2xl object-cover shadow-md" loading="lazy">`
+    : `<div class="w-52 h-64 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
         <svg class="w-20 h-20 text-accent/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
         </svg>
@@ -159,7 +159,7 @@ function renderSkills(skills) {
 
     return `
       <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1">
-        <h3 class="text-gray-900 font-semibold mb-5 pb-3 border-b border-gray-100">${cat.category}</h3>
+        <h3 class="text-gray-900 font-semibold mb-5 pb-3 border-b border-warm-200/50">${cat.category}</h3>
         ${itemsHtml}
       </div>
     `;
@@ -185,7 +185,7 @@ function renderExperience(experience) {
     return `
       <div class="relative pl-8 pb-10 last:pb-0">
         <div class="absolute left-0 top-0 bottom-0 w-px timeline-line"></div>
-        <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-gray-50'}"></div>
+        <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-warm-50'}"></div>
         <div class="glass-card rounded-2xl p-6 ml-4">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
             <h3 class="text-lg font-semibold text-gray-900">${exp.company}</h3>
@@ -214,7 +214,7 @@ function renderProjects(projects) {
       ? `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5">
           <img src="${proj.image}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy">
         </div>`
-      : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+      : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center">
           <svg class="w-12 h-12 text-accent/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
@@ -237,7 +237,7 @@ function renderProjects(projects) {
         <h3 class="text-lg font-semibold text-gray-900 mb-2">${proj.name}</h3>
         <p class="text-gray-500 text-sm mb-4 leading-relaxed">${proj.description}</p>
         <div class="flex flex-wrap gap-1.5 mb-5">${techsHtml}</div>
-        <div class="flex items-center gap-4 pt-4 border-t border-gray-100">${linksHtml}</div>
+        <div class="flex items-center gap-4 pt-4 border-t border-warm-200/50">${linksHtml}</div>
       </div>
     `;
   }).join('');
