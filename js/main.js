@@ -35,6 +35,9 @@ function renderMeta(meta, hero) {
   document.querySelector('meta[name="description"]').content = meta.description;
   document.querySelector('meta[property="og:title"]').content = meta.title;
   document.querySelector('meta[property="og:description"]').content = meta.description;
+  if (meta.ogImage) {
+    document.querySelector('meta[property="og:image"]').content = meta.ogImage;
+  }
   document.getElementById('nav-logo').textContent = hero.nameEn;
 }
 
@@ -72,7 +75,7 @@ function renderAbout(about) {
     .join('');
 
   const profileImageHtml = about.profileImage
-    ? `<img src="${about.profileImage}" alt="프로필 사진" class="w-48 h-48 rounded-full object-cover shadow-lg">`
+    ? `<img src="${about.profileImage}" alt="프로필 사진" class="w-48 h-48 rounded-full object-cover shadow-lg" loading="lazy">`
     : `<div class="w-48 h-48 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
         <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -161,7 +164,7 @@ function renderProjects(projects) {
 
     const imageHtml = proj.image
       ? `<div class="h-40 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5">
-          <img src="${proj.image}" alt="${proj.name}" class="w-full h-full object-cover">
+          <img src="${proj.image}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy">
         </div>`
       : `<div class="h-40 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
           <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
