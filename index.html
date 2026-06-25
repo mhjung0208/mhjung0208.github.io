@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#2563eb">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -18,8 +18,7 @@
       theme: {
         extend: {
           colors: {
-            dark: { 900: '#0a0f0d', 800: '#0f1613', 700: '#141e1a', 600: '#1a2622', 500: '#1e2d28' },
-            accent: { DEFAULT: '#10b981', light: '#34d399', dark: '#059669' }
+            accent: { DEFAULT: '#2563eb', light: '#3b82f6', dark: '#1d4ed8' }
           }
         }
       }
@@ -27,10 +26,10 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-dark-900 text-gray-300">
+<body class="bg-gray-50 text-gray-700">
 
   <!-- 네비게이션 -->
-  <nav id="navbar" class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-md z-50 border-b border-white/5">
+  <nav id="navbar" class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <a href="#hero" id="nav-logo" class="text-xl font-bold text-accent flex items-center gap-2">
@@ -40,17 +39,17 @@
 
         <!-- 데스크톱 메뉴 -->
         <div class="hidden md:flex items-center space-x-6">
-          <a href="#hero" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Home</a>
-          <a href="#about" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">About</a>
-          <a href="#experience" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Experience</a>
-          <a href="#skills" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Skills</a>
-          <a href="#projects" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Projects</a>
-          <a href="#education" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Education</a>
-          <a href="#contact" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Contact</a>
+          <a href="#hero" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Home</a>
+          <a href="#about" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">About</a>
+          <a href="#experience" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Experience</a>
+          <a href="#skills" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Skills</a>
+          <a href="#projects" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Projects</a>
+          <a href="#education" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Education</a>
+          <a href="#contact" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Contact</a>
         </div>
 
         <!-- 모바일 메뉴 버튼 -->
-        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-gray-400 hover:text-accent transition-colors">
+        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-gray-500 hover:text-accent transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -58,14 +57,14 @@
       </div>
 
       <!-- 모바일 메뉴 -->
-      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-white/5">
-        <a href="#hero" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Home</a>
-        <a href="#about" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">About</a>
-        <a href="#experience" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Experience</a>
-        <a href="#skills" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Skills</a>
-        <a href="#projects" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Projects</a>
-        <a href="#education" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Education</a>
-        <a href="#contact" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Contact</a>
+      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-gray-100">
+        <a href="#hero" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Home</a>
+        <a href="#about" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">About</a>
+        <a href="#experience" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Experience</a>
+        <a href="#skills" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Skills</a>
+        <a href="#projects" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Projects</a>
+        <a href="#education" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Education</a>
+        <a href="#contact" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Contact</a>
       </div>
     </div>
   </nav>
@@ -77,60 +76,60 @@
   </section>
 
   <!-- About Me 섹션 -->
-  <section id="about" class="py-20 border-t border-white/5 fade-in">
+  <section id="about" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">About <span class="text-accent">Me</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">About <span class="text-accent">Me</span></h2>
       <div id="about-content"></div>
     </div>
   </section>
 
   <!-- Experience 섹션 -->
-  <section id="experience" class="py-20 border-t border-white/5 fade-in">
+  <section id="experience" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">Work <span class="text-accent">Experience</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Work <span class="text-accent">Experience</span></h2>
       <div id="experience-content"></div>
     </div>
   </section>
 
   <!-- Skills 섹션 -->
-  <section id="skills" class="py-20 border-t border-white/5 fade-in">
+  <section id="skills" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Skills</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Skills</span></h2>
       <div id="skills-content"></div>
     </div>
   </section>
 
   <!-- Projects 섹션 -->
-  <section id="projects" class="py-20 border-t border-white/5 fade-in">
+  <section id="projects" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Projects</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Projects</span></h2>
       <div id="projects-content"></div>
     </div>
   </section>
 
   <!-- Education 섹션 -->
-  <section id="education" class="py-20 border-t border-white/5 fade-in">
+  <section id="education" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Education</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Education</span></h2>
       <div id="education-content"></div>
     </div>
   </section>
 
   <!-- Contact 섹션 -->
-  <section id="contact" class="py-20 border-t border-white/5 fade-in">
+  <section id="contact" class="py-20 border-t border-gray-100 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-12 text-center">Contact <span class="text-accent">Me</span></h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Contact <span class="text-accent">Me</span></h2>
       <div id="contact-content"></div>
     </div>
   </section>
 
   <!-- 푸터 -->
-  <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-600">
+  <footer class="py-8 border-t border-gray-100 text-center text-sm text-gray-400">
     <p id="footer-text"></p>
   </footer>
 
   <!-- 스크롤 상단 이동 버튼 -->
-  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-accent text-dark-900 rounded-full shadow-lg shadow-accent/25 hover:bg-accent-light transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
+  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-accent text-white rounded-full shadow-lg shadow-accent/25 hover:bg-accent-light transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>

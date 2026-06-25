@@ -56,7 +56,7 @@ function renderHero(hero, projects) {
 
   const badgesHtml = hero.badges.map(b => `
     <div class="flex items-center justify-between gap-4">
-      <span class="text-sm text-gray-300">${b.name}</span>
+      <span class="text-sm text-gray-600">${b.name}</span>
       <span class="text-xs text-accent">${b.level}</span>
     </div>
   `).join('');
@@ -92,13 +92,13 @@ function renderHero(hero, projects) {
       <div class="relative z-10 max-w-2xl space-y-8">
         <div>
           <p class="text-accent text-sm font-medium mb-3 tracking-wider">${hero.title}</p>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-2">${hero.heading}</h1>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"><span class="accent-underline text-white">${hero.headingAccent}</span></h1>
-          <p class="text-gray-400 mt-6 text-lg max-w-lg">${hero.subtitle}</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-2">${hero.heading}</h1>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"><span class="accent-underline text-gray-900">${hero.headingAccent}</span></h1>
+          <p class="text-gray-500 mt-6 text-lg max-w-lg">${hero.subtitle}</p>
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <a href="#projects" class="px-7 py-3.5 bg-accent text-dark-900 rounded-lg font-medium text-sm hover:bg-accent-light transition-colors flex items-center gap-2">
+          <a href="#projects" class="px-7 py-3.5 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-light transition-colors flex items-center gap-2">
             View Projects
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
@@ -119,7 +119,7 @@ function renderAbout(about) {
         <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
         </svg>
-        <span class="text-gray-400">${h}</span>
+        <span class="text-gray-500">${h}</span>
       </li>
     `)
     .join('');
@@ -136,7 +136,7 @@ function renderAbout(about) {
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="flex-shrink-0">${profileImageHtml}</div>
       <div class="flex-1">
-        <p class="text-gray-400 text-lg leading-relaxed mb-8">${about.description}</p>
+        <p class="text-gray-500 text-lg leading-relaxed mb-8">${about.description}</p>
         <ul class="space-y-3">${highlightsHtml}</ul>
       </div>
     </div>
@@ -148,7 +148,7 @@ function renderSkills(skills) {
     const itemsHtml = cat.items.map(item => `
       <div class="mb-4 last:mb-0">
         <div class="flex justify-between mb-2">
-          <span class="text-sm text-gray-300">${item.name}</span>
+          <span class="text-sm text-gray-600">${item.name}</span>
           <span class="text-xs text-accent">${item.level}%</span>
         </div>
         <div class="skill-bar-track rounded-full h-1.5">
@@ -159,7 +159,7 @@ function renderSkills(skills) {
 
     return `
       <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1">
-        <h3 class="text-white font-semibold mb-5 pb-3 border-b border-white/5">${cat.category}</h3>
+        <h3 class="text-gray-900 font-semibold mb-5 pb-3 border-b border-gray-100">${cat.category}</h3>
         ${itemsHtml}
       </div>
     `;
@@ -185,14 +185,14 @@ function renderExperience(experience) {
     return `
       <div class="relative pl-8 pb-10 last:pb-0">
         <div class="absolute left-0 top-0 bottom-0 w-px timeline-line"></div>
-        <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-dark-900'}"></div>
+        <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-gray-50'}"></div>
         <div class="glass-card rounded-2xl p-6 ml-4">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-            <h3 class="text-lg font-semibold text-white">${exp.company}</h3>
+            <h3 class="text-lg font-semibold text-gray-900">${exp.company}</h3>
             <span class="text-sm text-accent font-medium">${exp.period}</span>
           </div>
           <p class="text-gray-500 text-sm mb-3">${exp.role}</p>
-          <p class="text-gray-400 text-sm mb-4">${exp.description}</p>
+          <p class="text-gray-500 text-sm mb-4">${exp.description}</p>
           <ul class="list-disc list-inside space-y-1.5">${highlightsHtml}</ul>
         </div>
       </div>
@@ -214,7 +214,7 @@ function renderProjects(projects) {
       ? `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5">
           <img src="${proj.image}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy">
         </div>`
-      : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-dark-600 to-dark-800 flex items-center justify-center">
+      : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
           <svg class="w-12 h-12 text-accent/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
@@ -234,10 +234,10 @@ function renderProjects(projects) {
     return `
       <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1">
         ${imageHtml}
-        <h3 class="text-lg font-semibold text-white mb-2">${proj.name}</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">${proj.name}</h3>
         <p class="text-gray-500 text-sm mb-4 leading-relaxed">${proj.description}</p>
         <div class="flex flex-wrap gap-1.5 mb-5">${techsHtml}</div>
-        <div class="flex items-center gap-4 pt-4 border-t border-white/5">${linksHtml}</div>
+        <div class="flex items-center gap-4 pt-4 border-t border-gray-100">${linksHtml}</div>
       </div>
     `;
   }).join('');
@@ -258,9 +258,9 @@ function renderEducation(education, certificates) {
       </div>
       <div>
         <span class="text-sm text-accent font-medium">${edu.period}</span>
-        <h3 class="text-lg font-semibold text-white mt-0.5">${edu.school}</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mt-0.5">${edu.school}</h3>
         <p class="text-gray-500 text-sm">${edu.major}</p>
-        ${edu.description ? `<p class="text-gray-400 text-sm mt-1">${edu.description}</p>` : ''}
+        ${edu.description ? `<p class="text-gray-500 text-sm mt-1">${edu.description}</p>` : ''}
       </div>
     </div>
   `).join('');
@@ -275,7 +275,7 @@ function renderEducation(education, certificates) {
           </svg>
         </div>
         <div>
-          <h3 class="text-lg font-semibold text-white">${cert.name}</h3>
+          <h3 class="text-lg font-semibold text-gray-900">${cert.name}</h3>
           <p class="text-gray-500 text-sm">${cert.issuer}</p>
           <span class="text-sm text-gray-600">${cert.date}</span>
         </div>
@@ -283,7 +283,7 @@ function renderEducation(education, certificates) {
     `).join('');
 
     certHtml = `
-      <h3 class="text-xl font-semibold text-white mt-10 mb-6">Certificates</h3>
+      <h3 class="text-xl font-semibold text-gray-900 mt-10 mb-6">Certificates</h3>
       <div class="space-y-4">${certItemsHtml}</div>
     `;
   }
@@ -313,7 +313,7 @@ function renderContact(contact) {
         ${CONTACT_ICONS[link.key] || ''}
       </div>
       <div>
-        <p class="text-sm font-medium text-white">${link.label}</p>
+        <p class="text-sm font-medium text-gray-900">${link.label}</p>
         <p class="text-sm text-gray-500">${link.text}</p>
       </div>
     </a>
