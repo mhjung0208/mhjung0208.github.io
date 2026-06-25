@@ -6,10 +6,22 @@
   },
   "hero": {
     "name": "홍길동",
-    "nameEn": "GilDong",
+    "nameEn": "Jung Min Hwa",
     "title": "Frontend Developer",
+    "heading": "Designing Digital",
+    "headingAccent": "Experiences",
     "subtitle": "사용자 경험을 중심으로 생각하는 프론트엔드 개발자입니다.",
-    "resumeUrl": "#"
+    "profileImage": "",
+    "resumeUrl": "#",
+    "stats": [
+      { "value": "3+", "label": "Years Exp" },
+      { "value": "10+", "label": "Projects" }
+    ],
+    "badges": [
+      { "name": "React", "level": "80%" },
+      { "name": "JavaScript", "level": "85%" },
+      { "name": "TypeScript", "level": "75%" }
+    ]
   },
   "about": {
     "profileImage": "",
@@ -117,8 +129,6 @@
   ],
   "contact": {
     "email": "example@email.com",
-    "github": "https://github.com/username",
-    "linkedin": "https://linkedin.com/in/username",
-    "blog": ""
+    "phone": "010-0000-0000"
   }
 }

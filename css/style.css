@@ -6,13 +6,47 @@ section {
   scroll-margin-top: 4rem;
 }
 
+/* 네비게이션 활성 링크 */
 .nav-link.active,
 .mobile-nav-link.active {
-  color: #2563eb;
+  color: #10b981;
   font-weight: 600;
 }
 
-/* 스크롤 페이드인 애니메이션 */
+/* Hero 배경 그리드 */
+.hero-grid-bg {
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 60px 60px, 60px 60px;
+}
+
+/* Hero 프로필 이미지 프레임 */
+.hero-profile-frame {
+  position: relative;
+}
+
+.hero-profile-frame::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 2px dashed rgba(16, 185, 129, 0.3);
+  border-radius: 1rem;
+}
+
+/* 글래스 카드 */
+.glass-card {
+  background: rgba(20, 30, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* 스크롤 페이드인 */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -36,89 +70,41 @@ section {
   pointer-events: auto;
 }
 
-/* 다크모드 */
-.dark body,
-html.dark body {
-  background-color: #0f172a;
-  color: #e2e8f0;
+/* 스킬 프로그레스 바 */
+.skill-bar-track {
+  background: rgba(255, 255, 255, 0.06);
 }
 
-html.dark nav {
-  background-color: rgba(15, 23, 42, 0.9);
+.skill-bar-fill {
+  background: linear-gradient(90deg, #059669, #10b981, #34d399);
+  transition: width 1s ease-out;
 }
 
-html.dark .bg-white {
-  background-color: #1e293b;
+/* 타임라인 */
+.timeline-line {
+  background: linear-gradient(180deg, #10b981, rgba(16, 185, 129, 0.1));
 }
 
-html.dark .bg-slate-50,
-html.dark .bg-slate-100 {
-  background-color: #1e293b;
+/* 코드 스니펫 장식 */
+.code-decoration {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(16, 185, 129, 0.25);
+  pointer-events: none;
+  user-select: none;
 }
 
-html.dark .bg-gradient-to-br {
-  background-image: none;
-  background-color: #0f172a;
+/* 액센트 밑줄 */
+.accent-underline {
+  text-decoration: underline;
+  text-decoration-color: #10b981;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
 }
 
-html.dark .text-slate-900 {
-  color: #f1f5f9;
-}
-
-html.dark .text-slate-800 {
-  color: #e2e8f0;
-}
-
-html.dark .text-slate-700 {
-  color: #cbd5e1;
-}
-
-html.dark .text-slate-600 {
-  color: #94a3b8;
-}
-
-html.dark .text-slate-500 {
-  color: #64748b;
-}
-
-html.dark .border-slate-100 {
-  border-color: #334155;
-}
-
-html.dark .bg-white.rounded-2xl,
-html.dark .bg-white.rounded-xl {
-  background-color: #1e293b;
-}
-
-html.dark footer {
-  background-color: #020617;
-}
-
-html.dark .shadow-sm {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-html.dark .bg-slate-100.rounded-full {
-  background-color: #334155;
-}
-
-html.dark .bg-slate-50.rounded-2xl {
-  background-color: #1e293b;
-}
-
-/* 다크모드 네비게이션 링크 */
-html.dark .nav-link,
-html.dark .mobile-nav-link {
-  color: #94a3b8;
-}
-
-html.dark .nav-link:hover,
-html.dark .mobile-nav-link:hover,
-html.dark .nav-link.active,
-html.dark .mobile-nav-link.active {
-  color: #60a5fa;
-}
-
-html.dark #menu-toggle {
-  color: #94a3b8;
+/* 스탯 카드 구분선 */
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
 }

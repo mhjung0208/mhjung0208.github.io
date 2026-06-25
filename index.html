@@ -10,117 +10,127 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#10b981">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: { 900: '#0a0f0d', 800: '#0f1613', 700: '#141e1a', 600: '#1a2622', 500: '#1e2d28' },
+            accent: { DEFAULT: '#10b981', light: '#34d399', dark: '#059669' }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-dark-900 text-gray-300">
 
   <!-- 네비게이션 -->
-  <nav id="navbar" class="fixed top-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-shadow duration-300">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <nav id="navbar" class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-md z-50 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <a href="#hero" id="nav-logo" class="text-xl font-bold text-blue-600"></a>
+        <a href="#hero" id="nav-logo" class="text-xl font-bold text-accent flex items-center gap-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span></span>
+        </a>
 
         <!-- 데스크톱 메뉴 -->
-        <div class="hidden md:flex space-x-8">
-          <a href="#about" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">About</a>
-          <a href="#skills" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
-          <a href="#experience" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Experience</a>
-          <a href="#projects" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
-          <a href="#education" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Education</a>
-          <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#hero" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Home</a>
+          <a href="#about" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">About</a>
+          <a href="#experience" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Experience</a>
+          <a href="#skills" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Skills</a>
+          <a href="#projects" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Projects</a>
+          <a href="#education" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Education</a>
+          <a href="#contact" class="nav-link text-sm text-gray-400 hover:text-accent transition-colors">Contact</a>
         </div>
 
-        <!-- 다크모드 토글 + 모바일 메뉴 버튼 -->
-        <div class="flex items-center gap-2">
-          <button id="dark-toggle" class="p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors" aria-label="다크모드 토글">
-            <svg id="dark-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-            </svg>
-          </button>
-          <button id="menu-toggle" class="md:hidden p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors">
+        <!-- 모바일 메뉴 버튼 -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-gray-400 hover:text-accent transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
-        </div>
       </div>
 
       <!-- 모바일 메뉴 -->
-      <div id="mobile-menu" class="hidden md:hidden pb-4">
-        <a href="#about" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">About</a>
-        <a href="#skills" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
-        <a href="#experience" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">Experience</a>
-        <a href="#projects" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
-        <a href="#education" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">Education</a>
-        <a href="#contact" class="mobile-nav-link block py-2 text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-white/5">
+        <a href="#hero" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Home</a>
+        <a href="#about" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">About</a>
+        <a href="#experience" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Experience</a>
+        <a href="#skills" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Skills</a>
+        <a href="#projects" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Projects</a>
+        <a href="#education" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Education</a>
+        <a href="#contact" class="mobile-nav-link block py-2.5 text-gray-400 hover:text-accent transition-colors">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero 섹션 -->
-  <section id="hero" class="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-    <div id="hero-content" class="text-center px-4"></div>
+  <section id="hero" class="pt-80 pb-[17rem] flex items-center relative overflow-hidden">
+    <div class="hero-grid-bg absolute inset-0"></div>
+    <div id="hero-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10"></div>
   </section>
 
   <!-- About Me 섹션 -->
-  <section id="about" class="py-20 bg-white fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">About Me</h2>
+  <section id="about" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">About <span class="text-accent">Me</span></h2>
       <div id="about-content"></div>
     </div>
   </section>
 
-  <!-- Skills 섹션 -->
-  <section id="skills" class="py-20 fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Skills</h2>
-      <div id="skills-content"></div>
-    </div>
-  </section>
-
   <!-- Experience 섹션 -->
-  <section id="experience" class="py-20 bg-white fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Experience</h2>
+  <section id="experience" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">Work <span class="text-accent">Experience</span></h2>
       <div id="experience-content"></div>
     </div>
   </section>
 
+  <!-- Skills 섹션 -->
+  <section id="skills" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Skills</span></h2>
+      <div id="skills-content"></div>
+    </div>
+  </section>
+
   <!-- Projects 섹션 -->
-  <section id="projects" class="py-20 fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Projects</h2>
+  <section id="projects" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Projects</span></h2>
       <div id="projects-content"></div>
     </div>
   </section>
 
   <!-- Education 섹션 -->
-  <section id="education" class="py-20 bg-white fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Education</h2>
+  <section id="education" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">My <span class="text-accent">Education</span></h2>
       <div id="education-content"></div>
     </div>
   </section>
 
   <!-- Contact 섹션 -->
-  <section id="contact" class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 fade-in">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Contact</h2>
-      <p class="text-slate-500 text-center mb-12">함께 일하고 싶으시다면 편하게 연락해 주세요.</p>
+  <section id="contact" class="py-20 border-t border-white/5 fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-12 text-center">Contact <span class="text-accent">Me</span></h2>
       <div id="contact-content"></div>
     </div>
   </section>
 
   <!-- 푸터 -->
-  <footer class="py-8 bg-slate-900 text-slate-400 text-center text-sm">
+  <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-600">
     <p id="footer-text"></p>
   </footer>
 
   <!-- 스크롤 상단 이동 버튼 -->
-  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
+  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-accent text-dark-900 rounded-full shadow-lg shadow-accent/25 hover:bg-accent-light transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>
