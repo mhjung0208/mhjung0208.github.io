@@ -30,12 +30,19 @@
           <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
         </div>
 
-        <!-- 모바일 메뉴 버튼 -->
-        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors">
+        <!-- 다크모드 토글 + 모바일 메뉴 버튼 -->
+        <div class="flex items-center gap-2">
+          <button id="dark-toggle" class="p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors" aria-label="다크모드 토글">
+            <svg id="dark-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+          <button id="menu-toggle" class="md:hidden p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
+        </div>
       </div>
 
       <!-- 모바일 메뉴 -->
@@ -56,7 +63,7 @@
   </section>
 
   <!-- About Me 섹션 -->
-  <section id="about" class="py-20 bg-white">
+  <section id="about" class="py-20 bg-white fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">About Me</h2>
       <div id="about-content"></div>
@@ -64,7 +71,7 @@
   </section>
 
   <!-- Skills 섹션 -->
-  <section id="skills" class="py-20">
+  <section id="skills" class="py-20 fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Skills</h2>
       <div id="skills-content"></div>
@@ -72,7 +79,7 @@
   </section>
 
   <!-- Experience 섹션 -->
-  <section id="experience" class="py-20 bg-white">
+  <section id="experience" class="py-20 bg-white fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Experience</h2>
       <div id="experience-content"></div>
@@ -80,7 +87,7 @@
   </section>
 
   <!-- Projects 섹션 -->
-  <section id="projects" class="py-20">
+  <section id="projects" class="py-20 fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Projects</h2>
       <div id="projects-content"></div>
@@ -88,7 +95,7 @@
   </section>
 
   <!-- Education 섹션 -->
-  <section id="education" class="py-20 bg-white">
+  <section id="education" class="py-20 bg-white fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Education</h2>
       <div id="education-content"></div>
@@ -96,7 +103,7 @@
   </section>
 
   <!-- Contact 섹션 -->
-  <section id="contact" class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+  <section id="contact" class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 fade-in">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Contact</h2>
       <p class="text-slate-500 text-center mb-12">함께 일하고 싶으시다면 편하게 연락해 주세요.</p>
@@ -108,6 +115,13 @@
   <footer class="py-8 bg-slate-900 text-slate-400 text-center text-sm">
     <p id="footer-text"></p>
   </footer>
+
+  <!-- 스크롤 상단 이동 버튼 -->
+  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
 
   <script src="js/main.js"></script>
 </body>

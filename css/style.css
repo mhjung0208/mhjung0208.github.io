@@ -11,3 +11,114 @@ section {
   color: #2563eb;
   font-weight: 600;
 }
+
+/* 스크롤 페이드인 애니메이션 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 스크롤 상단 버튼 */
+#scroll-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#scroll-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 다크모드 */
+.dark body,
+html.dark body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+html.dark nav {
+  background-color: rgba(15, 23, 42, 0.9);
+}
+
+html.dark .bg-white {
+  background-color: #1e293b;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-100 {
+  background-color: #1e293b;
+}
+
+html.dark .bg-gradient-to-br {
+  background-image: none;
+  background-color: #0f172a;
+}
+
+html.dark .text-slate-900 {
+  color: #f1f5f9;
+}
+
+html.dark .text-slate-800 {
+  color: #e2e8f0;
+}
+
+html.dark .text-slate-700 {
+  color: #cbd5e1;
+}
+
+html.dark .text-slate-600 {
+  color: #94a3b8;
+}
+
+html.dark .text-slate-500 {
+  color: #64748b;
+}
+
+html.dark .border-slate-100 {
+  border-color: #334155;
+}
+
+html.dark .bg-white.rounded-2xl,
+html.dark .bg-white.rounded-xl {
+  background-color: #1e293b;
+}
+
+html.dark footer {
+  background-color: #020617;
+}
+
+html.dark .shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .bg-slate-100.rounded-full {
+  background-color: #334155;
+}
+
+html.dark .bg-slate-50.rounded-2xl {
+  background-color: #1e293b;
+}
+
+/* 다크모드 네비게이션 링크 */
+html.dark .nav-link,
+html.dark .mobile-nav-link {
+  color: #94a3b8;
+}
+
+html.dark .nav-link:hover,
+html.dark .mobile-nav-link:hover,
+html.dark .nav-link.active,
+html.dark .mobile-nav-link.active {
+  color: #60a5fa;
+}
+
+html.dark #menu-toggle {
+  color: #94a3b8;
+}

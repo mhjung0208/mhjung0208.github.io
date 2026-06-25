@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   initNavigation();
+  initDarkMode();
+  initScrollTop();
+  initFadeIn();
 
   const data = await loadResumeData();
   if (data) renderAll(data);
@@ -316,4 +319,48 @@ function initNavigation() {
   }, { rootMargin: '-20% 0px -80% 0px' });
 
   sections.forEach(section => observer.observe(section));
+}
+
+function initDarkMode() {
+  const toggle = document.getElementById('dark-toggle');
+  const icon = document.getElementById('dark-icon');
+  const sunPath = 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z';
+  const moonPath = 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z';
+
+  if (localStorage.getItem('theme') === 'dark' ||
+    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    icon.querySelector('path').setAttribute('d', sunPath);
+  }
+
+  toggle.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    icon.querySelector('path').setAttribute('d', isDark ? sunPath : moonPath);
+  });
+}
+
+function initScrollTop() {
+  const btn = document.getElementById('scroll-top');
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+function initFadeIn() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
