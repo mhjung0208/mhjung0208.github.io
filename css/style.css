@@ -22,19 +22,6 @@ section {
   background-size: 100% 100%, 60px 60px, 60px 60px;
 }
 
-/* Hero 프로필 이미지 프레임 */
-.hero-profile-frame {
-  position: relative;
-}
-
-.hero-profile-frame::before {
-  content: '';
-  position: absolute;
-  inset: -12px;
-  border: 2px dashed rgba(16, 185, 129, 0.3);
-  border-radius: 1rem;
-}
-
 /* 글래스 카드 */
 .glass-card {
   background: rgba(20, 30, 26, 0.8);

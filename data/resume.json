@@ -1,31 +1,30 @@
 {
   "meta": {
-    "title": "홍길동 | Frontend Developer",
-    "description": "프론트엔드 개발자 홍길동의 웹 이력서입니다.",
+    "title": "정민화 | Unity Developer",
+    "description": "유니티 개발자 정민화의 포트폴리오 입니다.",
     "ogImage": ""
   },
   "hero": {
-    "name": "홍길동",
+    "name": "정민화",
     "nameEn": "Jung Min Hwa",
-    "title": "Frontend Developer",
+    "title": "Unity Developer",
     "heading": "Designing Digital",
     "headingAccent": "Experiences",
-    "subtitle": "사용자 경험을 중심으로 생각하는 프론트엔드 개발자입니다.",
-    "profileImage": "",
+    "subtitle": "사용자 경험을 중심으로 생각하는 유니티 개발자입니다.",
+    "profileImage": "data/Images/mhjung.png",
     "resumeUrl": "#",
     "stats": [
-      { "value": "3+", "label": "Years Exp" },
-      { "value": "10+", "label": "Projects" }
+      { "value": "8+", "label": "Years Exp" },
+      { "value": "8+", "label": "Projects" }
     ],
     "badges": [
-      { "name": "React", "level": "80%" },
-      { "name": "JavaScript", "level": "85%" },
-      { "name": "TypeScript", "level": "75%" }
+      { "name": "Unity", "level": "80%" },
+      { "name": "C#", "level": "85%" }
     ]
   },
   "about": {
     "profileImage": "",
-    "description": "안녕하세요, 프론트엔드 개발자 홍길동입니다. 사용자 중심의 직관적인 인터페이스를 만드는 것에 열정을 가지고 있습니다. 깔끔한 코드와 효율적인 설계를 지향하며, 새로운 기술을 배우는 것을 즐깁니다.",
+    "description": "안녕하세요, 유니티 개발자 정민화입니다. 사용자 중심의 직관적인 인터페이스를 만드는 것에 열정을 가지고 있습니다. 깔끔한 코드와 효율적인 설계를 지향하며, 새로운 기술을 배우는 것을 즐깁니다.",
     "highlights": [
       "3년차 프론트엔드 개발자",
       "React, Vue.js 기반 SPA 개발 경험",

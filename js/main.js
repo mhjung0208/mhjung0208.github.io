@@ -66,63 +66,43 @@ function renderHero(hero, projects) {
   ).join('');
 
   const profileImageHtml = hero.profileImage
-    ? `<img src="${hero.profileImage}" alt="${hero.name}" class="w-full h-full object-cover rounded-xl" loading="lazy">`
-    : `<div class="w-full h-full rounded-xl bg-gradient-to-br from-dark-600 to-dark-800 flex items-center justify-center">
+    ? `<img src="${hero.profileImage}" alt="${hero.name}" class="w-full h-auto object-contain drop-shadow-2xl" loading="lazy">`
+    : `<div class="w-full h-96 flex items-center justify-center">
         <svg class="w-32 h-32 text-accent/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
         </svg>
       </div>`;
 
   document.getElementById('hero-content').innerHTML = `
-    <!-- 코드 장식 -->
     <div class="code-decoration absolute top-24 left-8 hidden lg:block">&lt;div className="info"&gt;</div>
-    <div class="code-decoration absolute top-24 right-8 hidden lg:block">function create() {</div>
+    <div class="code-decoration absolute bottom-24 right-8 hidden lg:block">function create() {</div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center py-8 lg:py-0">
-
-      <!-- 좌측: Latest Project + Stats -->
-      <div class="space-y-6 order-2 lg:order-1">
-        <div class="glass-card rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-accent rounded-full"></span>
-            <span class="text-xs text-accent font-medium">Latest Project</span>
-          </div>
-          <h3 class="text-white font-semibold mb-2">${latestProject.name}</h3>
-          <p class="text-gray-500 text-sm mb-4 leading-relaxed">${latestProject.description}</p>
-          <div class="flex flex-wrap gap-2">${latestTechsHtml}</div>
-        </div>
-
-        <div class="glass-card rounded-2xl p-6">
-          <div class="flex items-center justify-around">${statsHtml}</div>
-        </div>
+    <div class="relative">
+      <!-- 캐릭터 이미지 — 우측 하단 고정, 크게 -->
+      <div class="hidden lg:block absolute right-0 bottom-0 w-[55%] z-0 pointer-events-none">
+        ${profileImageHtml}
       </div>
 
-      <!-- 중앙: 프로필 이미지 -->
-      <div class="flex justify-center order-1 lg:order-2">
-        <div class="hero-profile-frame w-64 h-80 sm:w-72 sm:h-96">
-          ${profileImageHtml}
-        </div>
+      <!-- 모바일: 이미지 상단 표시 -->
+      <div class="lg:hidden flex justify-center mb-8">
+        <div class="w-72">${profileImageHtml}</div>
       </div>
 
-      <!-- 우측: 타이틀 + 스킬 뱃지 + CTA -->
-      <div class="space-y-6 order-3">
+      <!-- 좌측: 타이틀 + CTA -->
+      <div class="relative z-10 max-w-2xl space-y-8">
         <div>
-          <p class="text-accent text-sm font-medium mb-3">${hero.title}</p>
-          <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-1">${hero.heading}</h1>
-          <h1 class="text-3xl sm:text-4xl font-bold leading-tight"><span class="accent-underline text-white">${hero.headingAccent}</span></h1>
+          <p class="text-accent text-sm font-medium mb-3 tracking-wider">${hero.title}</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-2">${hero.heading}</h1>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"><span class="accent-underline text-white">${hero.headingAccent}</span></h1>
+          <p class="text-gray-400 mt-6 text-lg max-w-lg">${hero.subtitle}</p>
         </div>
 
-        <div class="glass-card rounded-2xl p-5">
-          <p class="text-xs text-gray-500 mb-3 uppercase tracking-wider">Core Skills</p>
-          <div class="space-y-2.5">${badgesHtml}</div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#projects" class="px-6 py-3 bg-accent text-dark-900 rounded-lg font-medium text-sm hover:bg-accent-light transition-colors text-center flex items-center justify-center gap-2">
+        <div class="flex flex-wrap gap-3">
+          <a href="#projects" class="px-7 py-3.5 bg-accent text-dark-900 rounded-lg font-medium text-sm hover:bg-accent-light transition-colors flex items-center gap-2">
             View Projects
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
-          <a href="#contact" class="px-6 py-3 border border-accent/30 text-accent rounded-lg font-medium text-sm hover:bg-accent/10 transition-colors text-center flex items-center justify-center gap-2">
+          <a href="#contact" class="px-7 py-3.5 border border-accent/30 text-accent rounded-lg font-medium text-sm hover:bg-accent/10 transition-colors flex items-center gap-2">
             Hire Me
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
