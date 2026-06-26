@@ -470,6 +470,52 @@ function initGallery(container) {
   nextBtn?.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
   dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
   thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => goTo(i)));
+
+  const viewport = gallery.querySelector('.img-slider-viewport');
+  if (viewport) {
+    viewport.style.cursor = 'zoom-in';
+    viewport.addEventListener('click', e => {
+      if (e.target.closest('.img-slider-btn')) return;
+      if (imageSrcs.length) openLightbox(imageSrcs, current, goTo);
+    });
+  }
+}
+
+function openLightbox(srcs, startIdx = 0, onNavigate = null) {
+  let current = startIdx;
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;';
+
+  const btnStyle = 'position:fixed;background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;';
+  const multi = srcs.length > 1;
+
+  overlay.innerHTML = `
+    <img id="lb-img" src="${srcs[current]}" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.5);pointer-events:none;">
+    <button id="lb-close" style="${btnStyle}top:20px;right:24px;">✕</button>
+    ${multi ? `<button id="lb-prev" style="${btnStyle}left:20px;top:50%;transform:translateY(-50%);">&#8249;</button>
+               <button id="lb-next" style="${btnStyle}right:20px;top:50%;transform:translateY(-50%);">&#8250;</button>` : ''}
+  `;
+
+  const img = overlay.querySelector('#lb-img');
+  const goTo = idx => {
+    current = (idx + srcs.length) % srcs.length;
+    img.src = srcs[current];
+    onNavigate?.(current);
+  };
+
+  const close = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => {
+    if (e.key === 'Escape') close();
+    if (multi && e.key === 'ArrowLeft') goTo(current - 1);
+    if (multi && e.key === 'ArrowRight') goTo(current + 1);
+  };
+
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  overlay.querySelector('#lb-close').addEventListener('click', close);
+  overlay.querySelector('#lb-prev')?.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  overlay.querySelector('#lb-next')?.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(overlay);
 }
 
 
