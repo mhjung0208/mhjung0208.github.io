@@ -121,15 +121,8 @@
       "description": "학사 졸업"
     }
   ],
-  "certificates": [
-    {
-      "name": "정보처리기사",
-      "issuer": "한국산업인력공단",
-      "date": "2020.11"
-    }
-  ],
+  "certificates": [],
   "contact": {
-    "email": "example@email.com",
-    "phone": "010-0000-0000"
+    "email": "example@email.com"
   }
 }

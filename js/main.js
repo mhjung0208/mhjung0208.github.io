@@ -24,7 +24,7 @@ function renderAll(data) {
   renderSkills(data.skills);
   renderExperience(data.experience);
   renderProjects(data.projects);
-  renderEducation(data.education, data.certificates);
+  renderEducation(data.education);
   renderContact(data.contact);
   renderFooter(data.hero.name);
 }
@@ -91,7 +91,7 @@ function renderHero(hero, projects) {
       <!-- 좌측: 타이틀 + CTA -->
       <div class="relative z-10 max-w-2xl space-y-8">
         <div>
-          <p class="text-accent text-sm font-medium mb-3 tracking-wider">${hero.title}</p>
+          <p class="text-accent text-lg font-bold mb-3 tracking-widest uppercase">${hero.title}</p>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-2">${hero.heading}</h1>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"><span class="accent-underline text-gray-900">${hero.headingAccent}</span></h1>
           <p class="text-gray-500 mt-6 text-lg max-w-lg">${hero.subtitle}</p>
@@ -101,10 +101,6 @@ function renderHero(hero, projects) {
           <a href="#projects" class="px-7 py-3.5 bg-accent text-white rounded-lg font-medium text-sm hover:bg-accent-light transition-colors flex items-center gap-2">
             View Projects
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
-          <a href="#contact" class="px-7 py-3.5 border border-accent/30 text-accent rounded-lg font-medium text-sm hover:bg-accent/10 transition-colors flex items-center gap-2">
-            Hire Me
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
         </div>
       </div>
@@ -176,20 +172,39 @@ function renderSkills(skills) {
   });
 }
 
+function calcWorkDuration(period) {
+  const parts = period.split(' - ');
+  if (parts.length !== 2) return '';
+  const parseDate = s => { const [y, m, d] = s.split('.').map(Number); return new Date(y, m - 1, d || 1); };
+  const start = parseDate(parts[0]);
+  const end = parseDate(parts[1]);
+  let years = end.getFullYear() - start.getFullYear();
+  let months = end.getMonth() - start.getMonth();
+  if (months < 0) { years--; months += 12; }
+  const result = [];
+  if (years > 0) result.push(`${years}년`);
+  if (months > 0) result.push(`${months}개월`);
+  return result.length ? `(${result.join(' ')})` : '';
+}
+
 function renderExperience(experience) {
   const itemsHtml = experience.map((exp, i) => {
     const highlightsHtml = exp.highlights
       .map(h => `<li class="text-gray-500 text-sm">${h}</li>`)
       .join('');
+    const duration = calcWorkDuration(exp.period);
 
     return `
       <div class="relative pl-8 pb-10 last:pb-0">
         <div class="absolute left-0 top-0 bottom-0 w-px timeline-line"></div>
         <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-warm-50'}"></div>
         <div class="glass-card rounded-2xl p-6 ml-4">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-1">
             <h3 class="text-lg font-semibold text-gray-900">${exp.company}</h3>
-            <span class="text-sm text-accent font-medium">${exp.period}</span>
+            <div class="flex flex-col sm:items-end gap-0.5">
+              <span class="text-sm font-bold text-accent">${exp.period}</span>
+              ${duration ? `<span class="text-xs font-semibold text-accent/70">${duration}</span>` : ''}
+            </div>
           </div>
           <p class="text-gray-500 text-sm mb-3">${exp.role}</p>
           <p class="text-gray-500 text-sm mb-4">${exp.description}</p>
@@ -247,7 +262,7 @@ function renderProjects(projects) {
   `;
 }
 
-function renderEducation(education, certificates) {
+function renderEducation(education) {
   const eduHtml = education.map(edu => `
     <div class="glass-card rounded-2xl p-6 flex gap-4">
       <div class="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
@@ -265,33 +280,9 @@ function renderEducation(education, certificates) {
     </div>
   `).join('');
 
-  let certHtml = '';
-  if (certificates && certificates.length > 0) {
-    const certItemsHtml = certificates.map(cert => `
-      <div class="glass-card rounded-2xl p-6 flex gap-4">
-        <div class="flex-shrink-0 w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-900">${cert.name}</h3>
-          <p class="text-gray-500 text-sm">${cert.issuer}</p>
-          <span class="text-sm text-gray-600">${cert.date}</span>
-        </div>
-      </div>
-    `).join('');
-
-    certHtml = `
-      <h3 class="text-xl font-semibold text-gray-900 mt-10 mb-6">Certificates</h3>
-      <div class="space-y-4">${certItemsHtml}</div>
-    `;
-  }
-
   document.getElementById('education-content').innerHTML = `
     <div class="max-w-3xl mx-auto">
       <div class="space-y-4">${eduHtml}</div>
-      ${certHtml}
     </div>
   `;
 }
@@ -304,7 +295,6 @@ const CONTACT_ICONS = {
 function renderContact(contact) {
   const links = [
     contact.email ? { key: 'email', label: 'Email', href: `mailto:${contact.email}`, text: contact.email } : null,
-    contact.phone ? { key: 'phone', label: 'Phone', href: `tel:${contact.phone}`, text: contact.phone } : null,
   ].filter(Boolean);
 
   const linksHtml = links.map(link => `
