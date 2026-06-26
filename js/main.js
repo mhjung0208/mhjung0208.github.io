@@ -566,11 +566,11 @@ const CONTACT_ICONS = {
 
 function renderContact(contact) {
   const links = [
-    contact.email ? { key: 'email', label: 'Email', href: `mailto:${contact.email}`, text: contact.email } : null,
+    contact.email ? { key: 'email', label: 'Email', text: contact.email } : null,
   ].filter(Boolean);
 
   const linksHtml = links.map(link => `
-    <a href="${link.href}" target="_blank" class="glass-card flex items-center gap-4 p-5 rounded-2xl transition-all hover:-translate-y-0.5">
+    <div class="glass-card flex items-center gap-4 p-5 rounded-2xl">
       <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
         ${CONTACT_ICONS[link.key] || ''}
       </div>
@@ -578,7 +578,7 @@ function renderContact(contact) {
         <p class="text-sm font-medium text-gray-900">${link.label}</p>
         <p class="text-sm text-gray-500">${link.text}</p>
       </div>
-    </a>
+    </div>
   `).join('');
 
   document.getElementById('contact-content').innerHTML = `
