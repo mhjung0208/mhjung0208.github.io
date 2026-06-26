@@ -179,12 +179,13 @@ section {
   display: flex;
   gap: 6px;
   margin-top: 6px;
-  width: 66.67%;
+  overflow-x: auto;
 }
 
 .img-thumb {
-  flex: 1;
-  aspect-ratio: 16 / 9;
+  flex: 0 0 auto;
+  width: 88px;
+  height: 56px;
   border-radius: 6px;
   border: 2px solid transparent;
   cursor: pointer;

@@ -227,8 +227,8 @@ function renderProjects(projects) {
 
     const thumbSrc = proj.image || (proj.details?.images?.[0] || '');
     const imageHtml = thumbSrc
-      ? `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5">
-          <img src="${thumbSrc}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy"
+      ? `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-warm-100 flex items-center justify-center">
+          <img src="${thumbSrc}" alt="${proj.name}" class="w-full h-full object-contain" loading="lazy"
                onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center\\'><svg class=\\'w-12 h-12 text-accent/15\\' fill=\\'none\\' stroke=\\'currentColor\\' viewBox=\\'0 0 24 24\\'><path stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' stroke-width=\\'1.5\\' d=\\'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\\'/></svg></div>'">
         </div>`
       : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center">
