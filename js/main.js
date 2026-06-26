@@ -225,9 +225,11 @@ function renderProjects(projects) {
       .map(t => `<span class="px-2 py-0.5 border border-accent/20 text-accent text-xs rounded-full">${t}</span>`)
       .join('');
 
-    const imageHtml = proj.image
+    const thumbSrc = proj.image || (proj.details?.images?.[0] || '');
+    const imageHtml = thumbSrc
       ? `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5">
-          <img src="${proj.image}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy">
+          <img src="${thumbSrc}" alt="${proj.name}" class="w-full h-full object-cover" loading="lazy"
+               onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center\\'><svg class=\\'w-12 h-12 text-accent/15\\' fill=\\'none\\' stroke=\\'currentColor\\' viewBox=\\'0 0 24 24\\'><path stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' stroke-width=\\'1.5\\' d=\\'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\\'/></svg></div>'">
         </div>`
       : `<div class="h-44 rounded-t-2xl overflow-hidden -mx-6 -mt-6 mb-5 bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center">
           <svg class="w-12 h-12 text-accent/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,9 +237,19 @@ function renderProjects(projects) {
           </svg>
         </div>`;
 
-    const platformHtml = proj.platform
-      ? `<span class="px-2 py-0.5 bg-accent/10 text-accent text-xs rounded-full font-medium">${proj.platform}</span>`
-      : '';
+    const d = proj.details || {};
+    const metaHtml = (d.company || d.period) ? `
+      <div class="flex items-center gap-3 mb-3 text-xs text-gray-400">
+        ${d.company ? `<span class="flex items-center gap-1">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          ${d.company}
+        </span>` : ''}
+        ${d.company && d.period ? `<span class="text-warm-300">·</span>` : ''}
+        ${d.period ? `<span class="flex items-center gap-1">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          ${d.period}
+        </span>` : ''}
+      </div>` : '';
 
     return `
       <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 cursor-pointer group" data-project-idx="${idx}">
@@ -248,7 +260,7 @@ function renderProjects(projects) {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
         </div>
-        ${platformHtml ? `<div class="mb-2">${platformHtml}</div>` : ''}
+        ${metaHtml}
         <p class="text-gray-500 text-sm mb-4 leading-relaxed">${proj.description}</p>
         <div class="flex flex-wrap gap-1.5">${techsHtml}</div>
       </div>
@@ -269,84 +281,128 @@ function renderProjects(projects) {
 function openProjectModal(proj) {
   const d = proj.details || {};
 
-  const imageHtml = proj.image
-    ? `<img src="${proj.image}" alt="${proj.name}" class="w-full h-56 object-cover rounded-2xl mb-6" loading="lazy">`
-    : '';
+  function renderNestedList(items, level) {
+    if (!items || !items.length) return '';
+    const markers = ['•', '◦', '▪'];
+    const marker = markers[Math.min(level, 2)];
+    const indent = level * 16;
+    return items.map(item => {
+      const text = typeof item === 'string' ? item : item.text;
+      const children = typeof item === 'object' ? (item.children || []) : [];
+      return `
+        <div style="padding-left:${indent}px" class="flex items-start gap-2 mb-1">
+          <span class="notion-bullet text-gray-400 text-sm mt-0.5 flex-shrink-0 select-none">${marker}</span>
+          <span class="text-gray-600 text-sm leading-relaxed">${text}</span>
+        </div>
+        ${children.length ? renderNestedList(children, level + 1) : ''}
+      `;
+    }).join('');
+  }
 
-  const techsHtml = proj.techs
-    .map(t => `<span class="px-3 py-1 border border-accent/20 text-accent text-xs rounded-full">${t}</span>`)
+  const techTagsHtml = proj.techs
+    .map(t => `<span class="px-2.5 py-0.5 bg-warm-100 border border-warm-200 text-gray-600 text-xs rounded font-medium">${t}</span>`)
     .join('');
 
-  const platformHtml = proj.platform
-    ? `<span class="px-3 py-1 bg-accent/10 text-accent text-sm rounded-full font-medium">${proj.platform}</span>`
-    : '';
+  const propertiesHtml = `
+    <div class="notion-properties space-y-2.5 mb-6 text-sm">
+      ${d.company ? `
+        <div class="flex items-center gap-3">
+          <span class="notion-prop-label text-gray-400 w-16 flex-shrink-0 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            회사
+          </span>
+          <span class="text-gray-700">${d.company}</span>
+        </div>` : ''}
+      <div class="flex items-start gap-3">
+        <span class="notion-prop-label text-gray-400 w-16 flex-shrink-0 flex items-center gap-1.5 mt-0.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          Skills
+        </span>
+        <div class="flex flex-wrap gap-1.5">${techTagsHtml}</div>
+      </div>
+      ${d.period ? `
+        <div class="flex items-center gap-3">
+          <span class="notion-prop-label text-gray-400 w-16 flex-shrink-0 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            기간
+          </span>
+          <span class="text-gray-700">${d.period}</span>
+        </div>` : ''}
+    </div>
+  `;
 
-  const featuresHtml = (d.features || []).map(f => `
-    <li class="flex items-start gap-3">
-      <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-      </svg>
-      <span class="text-gray-500 text-sm">${f}</span>
-    </li>
-  `).join('');
+  const linksSection = (proj.links || []).length ? `
+    <div class="notion-section mb-7">
+      <h3 class="notion-section-title text-gray-800 font-semibold text-base mb-3 flex items-center gap-2">
+        🔗 관련 링크
+      </h3>
+      <div class="space-y-1.5 pl-1">
+        ${proj.links.map(link => `
+          <div class="flex items-start gap-2">
+            <span class="text-gray-400 text-sm mt-0.5 select-none">•</span>
+            <a href="${link.url}" target="_blank" class="text-blue-500 hover:text-blue-600 text-sm underline underline-offset-2 break-all">${link.title}</a>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : '';
 
-  const linksHtml = (proj.links || []).map(link => `
-    <a href="${link.url}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 border border-accent/30 text-accent rounded-lg text-sm font-medium hover:bg-accent/10 transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-      </svg>
-      ${link.title}
-    </a>
-  `).join('');
+  const introItems = d.intro || [];
+  const galleryImages = (d.images || []).length ? d.images : (proj.image ? [proj.image] : []);
+  const galleryHtml = galleryImages.length ? buildGalleryHtml(galleryImages, proj.name) : '';
 
-  const metaHtml = [
-    d.period ? `<div><p class="text-xs text-gray-400 mb-0.5">기간</p><p class="text-sm font-medium text-gray-700">${d.period}</p></div>` : '',
-    d.role   ? `<div><p class="text-xs text-gray-400 mb-0.5">역할</p><p class="text-sm font-medium text-gray-700">${d.role}</p></div>` : '',
-  ].filter(Boolean).join('');
+  const introSection = (introItems.length || galleryImages.length) ? `
+    <div class="notion-section mb-7">
+      <h3 class="notion-section-title text-gray-800 font-semibold text-base mb-3 flex items-center gap-2">
+        📸 프로젝트 소개
+      </h3>
+      ${galleryHtml}
+      <div class="pl-1 space-y-1">
+        ${introItems.map(t => `
+          <div class="flex items-start gap-2">
+            <span class="text-gray-400 text-sm mt-0.5 select-none">•</span>
+            <span class="text-gray-600 text-sm leading-relaxed">${t}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : '';
+
+  const features = d.features || [];
+  const featuresSection = features.length ? `
+    <div class="notion-section mb-7">
+      <h3 class="notion-section-title text-gray-800 font-semibold text-base mb-3 flex items-center gap-2">
+        📌 담당 기능
+      </h3>
+      <div class="pl-1">${renderNestedList(features, 0)}</div>
+    </div>` : '';
 
   document.getElementById('project-modal').innerHTML = `
     <div class="project-modal-overlay fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" id="modal-overlay">
-      <div class="project-modal-box bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div class="sticky top-0 bg-white/95 backdrop-blur-sm z-10 flex items-center justify-between px-8 pt-7 pb-4 border-b border-warm-200/50">
-          <div>
-            <h2 class="text-xl font-bold text-gray-900">${proj.name}</h2>
-            ${platformHtml ? `<div class="mt-1">${platformHtml}</div>` : ''}
-          </div>
-          <button id="modal-close" class="w-9 h-9 rounded-full bg-warm-100 hover:bg-warm-200 flex items-center justify-center text-gray-500 transition-colors flex-shrink-0">
+      <div class="project-modal-box bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl">
+
+        <div class="sticky top-0 bg-white/95 backdrop-blur-sm z-10 flex justify-end px-6 pt-5 pb-2">
+          <button id="modal-close" class="w-8 h-8 rounded-md hover:bg-warm-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
         </div>
 
-        <div class="px-8 py-6 space-y-6">
-          ${imageHtml}
+        <div class="px-10 pb-12 pt-2">
+          <h1 class="text-3xl font-bold text-gray-900 mb-6 leading-tight">${proj.name}</h1>
 
-          ${metaHtml ? `<div class="flex gap-8 p-4 bg-warm-50 rounded-2xl">${metaHtml}</div>` : ''}
+          ${propertiesHtml}
 
-          ${d.description ? `
-            <div>
-              <h3 class="text-sm font-semibold text-gray-900 mb-2">프로젝트 소개</h3>
-              <p class="text-gray-500 text-sm leading-relaxed">${d.description}</p>
-            </div>` : ''}
+          <hr class="border-warm-200 mb-7">
 
-          ${featuresHtml ? `
-            <div>
-              <h3 class="text-sm font-semibold text-gray-900 mb-3">주요 기능</h3>
-              <ul class="space-y-2">${featuresHtml}</ul>
-            </div>` : ''}
-
-          <div>
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">기술 스택</h3>
-            <div class="flex flex-wrap gap-2">${techsHtml}</div>
-          </div>
-
-          ${linksHtml ? `
-            <div class="flex flex-wrap gap-3 pt-2 border-t border-warm-200/50">${linksHtml}</div>` : ''}
+          ${introSection}
+          ${featuresSection}
+          ${linksSection}
         </div>
       </div>
     </div>
   `;
+
+  initGallery(document.getElementById('project-modal'));
 
   document.getElementById('modal-overlay').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeProjectModal();
@@ -355,6 +411,67 @@ function openProjectModal(proj) {
   document.addEventListener('keydown', onModalEsc);
   document.body.style.overflow = 'hidden';
 }
+
+function buildGalleryHtml(images, name) {
+  const multi = images.length > 1;
+  const slidesHtml = images.map((src, i) => `
+    <div class="img-slider-slide" data-idx="${i}">
+      <img src="${src}" alt="${name} ${i + 1}" loading="lazy" onerror="this.style.opacity=0">
+    </div>`).join('');
+  const btnsHtml = multi ? `
+    <button class="img-slider-btn prev" aria-label="이전">
+      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button class="img-slider-btn next" aria-label="다음">
+      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>` : '';
+  const dotsHtml = multi
+    ? `<div class="img-slider-dots">${images.map((_, i) => `<button class="img-slider-dot${i === 0 ? ' active' : ''}"></button>`).join('')}</div>`
+    : '';
+  const thumbsHtml = multi ? `
+    <div class="img-thumbs">
+      ${images.map((src, i) => `
+        <button class="img-thumb${i === 0 ? ' active' : ''}" data-idx="${i}" style="background-image:url('${src}')" aria-label="${name} 이미지 ${i + 1}"></button>`).join('')}
+    </div>` : '';
+  return `
+    <div class="img-gallery mb-5">
+      <div class="img-slider">
+        <div class="img-slider-viewport">
+          ${btnsHtml}
+          <div class="img-slider-track">${slidesHtml}</div>
+        </div>
+        ${dotsHtml}
+      </div>
+      ${thumbsHtml}
+    </div>`;
+}
+
+function initGallery(container) {
+  const gallery = container.querySelector('.img-gallery');
+  if (!gallery) return;
+
+  const track = gallery.querySelector('.img-slider-track');
+  const slides = gallery.querySelectorAll('.img-slider-slide');
+  const dots = gallery.querySelectorAll('.img-slider-dot');
+  const thumbs = gallery.querySelectorAll('.img-thumb');
+  const prevBtn = gallery.querySelector('.img-slider-btn.prev');
+  const nextBtn = gallery.querySelector('.img-slider-btn.next');
+  const imageSrcs = [...slides].map(s => s.querySelector('img')?.src).filter(Boolean);
+  let current = 0;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+  }
+
+  prevBtn?.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  nextBtn?.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => goTo(i)));
+}
+
 
 function closeProjectModal() {
   document.getElementById('project-modal').innerHTML = '';
@@ -378,7 +495,7 @@ function renderEducation(education) {
       <div>
         <span class="text-sm text-accent font-medium">${edu.period}</span>
         <h3 class="text-lg font-semibold text-gray-900 mt-0.5">${edu.school}</h3>
-        <p class="text-gray-500 text-sm">${edu.major}</p>
+        ${edu.major ? `<p class="text-gray-500 text-sm">${edu.major}</p>` : ''}
         ${edu.description ? `<p class="text-gray-500 text-sm mt-1">${edu.description}</p>` : ''}
       </div>
     </div>

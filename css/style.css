@@ -93,6 +93,125 @@ section {
   animation: modal-slide-up 0.25s ease-out;
 }
 
+.img-slider {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.img-slider-viewport {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #f0ebe3;
+}
+
+.img-slider-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.img-slider-slide {
+  min-width: 100%;
+}
+
+.img-slider-slide img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.img-slider-slide .img-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0ebe3, #e8dfd3);
+}
+
+.img-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  transition: background 0.15s;
+}
+
+.img-slider-btn:hover { background: #fff; }
+.img-slider-btn.prev { left: 10px; }
+.img-slider-btn.next { right: 10px; }
+
+.img-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.img-slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e8dfd3;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+}
+
+.img-slider-dot.active { background: #e8604c; }
+
+.img-slider-slide {
+  background: #f0ebe3;
+}
+
+.img-thumbs {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  width: 66.67%;
+}
+
+.img-thumb {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.55;
+  background-size: cover;
+  background-position: center;
+  background-color: #e8dfd3;
+  transition: opacity 0.2s, border-color 0.2s;
+  padding: 0;
+}
+
+.img-thumb:hover { opacity: 0.8; }
+.img-thumb.active { opacity: 1; border-color: #e8604c; }
+
+.notion-prop-label {
+  font-size: 0.8rem;
+  min-width: 4rem;
+}
+
+.notion-section-title {
+  letter-spacing: -0.01em;
+}
+
+.notion-bullet {
+  line-height: 1.5rem;
+}
+
 @keyframes modal-fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
