@@ -93,7 +93,7 @@
       "description": "채팅·음성·화상·협업을 3D 가상 공간에 통합한 메신저 기반의 메타버스 프로젝트",
       "platform": "PC / Mobile / WebGL",
       "techs": ["Unity", "WebGL", "Android", "iOS"],
-      "image": "data/Images/projects/rfice-1.png",
+      "image": "data/Images/Projects/Rfice/Logo.png",
       "links": [
         { "title": "홈페이지", "url": "https://www.rfice.com/ko/" }
       ],
@@ -143,9 +143,7 @@
           }
         ],
         "images": [
-          "data/Images/projects/rfice-1.png",
-          "data/Images/projects/rfice-2.png",
-          "data/Images/projects/rfice-3.png"
+          "data/Images/Projects/Rfice/Logo.png"
         ]
       }
     },
@@ -222,6 +220,35 @@
         ],
         "images": [
           "data/Images/Projects/Ifland/Logo.jpg"
+        ]
+      }
+    },
+    {
+      "name": "SKT JUMP AR",
+      "description": "AR 카메라 콘텐츠 제공 및 촬영 이미지를 유저들과 공유하는 소셜 AR 카메라 앱",
+      "platform": "Mobile (iOS / Android)",
+      "techs": ["Unity", "Android", "iOS", "Swift", "Objective-C"],
+      "image": "data/Images/Projects/JumpAR/Logo.jpg",
+      "links": [],
+      "details": {
+        "company": "모프인터랙티브",
+        "period": "2020.03 - 2021.01",
+        "role": "클라이언트 개발",
+        "intro": [
+          "앱에서 제공하는 컨텐츠를 AR Camera로 제공",
+          "촬영한 이미지를 다른 유저들과 함께 공유",
+          "Google Play Store, Apple Store 배포"
+        ],
+        "features": [
+          { "text": "초기 AOS 타겟으로 제작된 Unity 프로젝트를 iOS에서 동작 가능하도록 Porting 작업" },
+          { "text": "추 후 플랫폼 별 Native 프로젝트로 전환되면서 iOS 담당" },
+          { "text": "서버 통신" },
+          { "text": "TikTok과 비슷한 메커니즘의 뷰어 게시판 제작" }
+        ],
+        "images": [
+          "data/Images/Projects/JumpAR/Logo.jpg",
+          "data/Images/Projects/JumpAR/Thumbnail_1.png",
+          "data/Images/Projects/JumpAR/Thumbnail_2.png"
         ]
       }
     }

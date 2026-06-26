@@ -102,7 +102,7 @@ section {
   position: relative;
   border-radius: 0.75rem;
   overflow: hidden;
-  background: #f0ebe3;
+  background: #ffffff;
 }
 
 .img-slider-track {
@@ -116,8 +116,8 @@ section {
 
 .img-slider-slide img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: 420px;
+  object-fit: contain;
   display: block;
 }
 
@@ -189,7 +189,8 @@ section {
   border: 2px solid transparent;
   cursor: pointer;
   opacity: 0.55;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   background-color: #e8dfd3;
   transition: opacity 0.2s, border-color 0.2s;
