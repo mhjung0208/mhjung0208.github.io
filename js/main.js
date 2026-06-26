@@ -350,12 +350,16 @@ function openProjectModal(proj) {
   const galleryImages = (d.images || []).length ? d.images : (proj.image ? [proj.image] : []);
   const galleryHtml = galleryImages.length ? buildGalleryHtml(galleryImages, proj.name) : '';
 
-  const introSection = (introItems.length || galleryImages.length) ? `
+  const imageSection = galleryImages.length ? `
+    <div class="mb-7">
+      ${galleryHtml}
+    </div>` : '';
+
+  const introSection = introItems.length ? `
     <div class="notion-section mb-7">
       <h3 class="notion-section-title text-gray-800 font-semibold text-base mb-3 flex items-center gap-2">
         📸 프로젝트 소개
       </h3>
-      ${galleryHtml}
       <div class="pl-1 space-y-1">
         ${introItems.map(t => `
           <div class="flex items-start gap-2">
@@ -394,6 +398,7 @@ function openProjectModal(proj) {
 
           <hr class="border-warm-200 mb-7">
 
+          ${imageSection}
           ${introSection}
           ${featuresSection}
           ${linksSection}
