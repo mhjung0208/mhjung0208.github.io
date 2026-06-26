@@ -189,27 +189,40 @@
       }
     },
     {
-      "name": "교육용 모바일 앱",
-      "description": "AR/VR 콘텐츠 기반 교육용 모바일 애플리케이션 개발 및 장기 운영.",
-      "platform": "Mobile (iOS / Android)",
-      "techs": ["Unity", "C#", "REST API", "ARFoundation"],
-      "image": "",
+      "name": "SKT Ifland Avatar Open Studio",
+      "description": "SKT Ifland 플랫폼에서 사용하는 아바타 코스튬을 제작·등록할 수 있는 유니티 기반 에디팅 스튜디오",
+      "platform": "PC / WebGL",
+      "techs": ["Unity", "WebGL"],
+      "image": "data/Images/Projects/Ifland/Logo.jpg",
       "links": [],
       "details": {
         "company": "모프인터랙티브",
-        "period": "2017.02 - 2022.01",
-        "role": "클라이언트 개발 / 프로젝트 관리",
+        "period": "2021.03 - 2022.01",
+        "role": "클라이언트 개발",
         "intro": [
-          "교육 기관 대상 AR/VR 콘텐츠 기반 모바일 애플리케이션 개발 및 장기 운영",
-          "고객사 커뮤니케이션부터 앱스토어 배포 관리까지 프로젝트 전반 담당"
+          "Ifland에서 사용하는 아바타의 코스튬을 제작하는 에디팅 스튜디오",
+          "Web에서도 간단히 등록이 가능하지만 전문가들을 위한 Unity 에디터 제공"
         ],
         "features": [
-          { "text": "ARFoundation 기반 AR 콘텐츠 구현" },
-          { "text": "iOS / Android 동시 빌드 및 앱스토어 배포 관리" },
-          { "text": "고객사 요구사항 분석 및 커뮤니케이션" },
-          { "text": "장기 라이브 서비스 운영 및 유지보수" }
+          {
+            "text": "일반 유저 및 CP(Content Provider)용 코스튬 제작 유니티 에디터 개발",
+            "children": [
+              { "text": "사용자가 제작한 FBX 및 텍스쳐를 활용하여 아바타 프리뷰 기능 개발" },
+              { "text": "애니메이션 및 조작 등의 편의 기능 제공" },
+              { "text": "빌드 전 최소 조건 검수 및 간편한 AssetBundle 빌드 제공" }
+            ]
+          },
+          {
+            "text": "관리자 심사용 WebGL Viewer 프로젝트 제작",
+            "children": [
+              { "text": "Webd에서 별도의 컨테이너로 Unity Player를 로드하여 아바타 프리뷰 볼 수 있도록 제공" },
+              { "text": "기능 명령을 위한 JS, Unity 간 통신 기능 개발 및 API 제공" }
+            ]
+          }
         ],
-        "images": []
+        "images": [
+          "data/Images/Projects/Ifland/Logo.jpg"
+        ]
       }
     }
   ],
