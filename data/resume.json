@@ -36,30 +36,30 @@
   },
   "skills": [
     {
-      "category": "Frontend",
+      "category": "Engine / Language",
       "items": [
-        { "name": "HTML/CSS", "level": 90 },
-        { "name": "JavaScript", "level": 85 },
-        { "name": "TypeScript", "level": 75 },
-        { "name": "React", "level": 80 },
-        { "name": "Vue.js", "level": 70 }
+        { "name": "Unity", "level": 85 },
+        { "name": "C#", "level": 80 },
+        { "name": "Animation", "level": 65 },
+        { "name": "Physics", "level": 60 }
       ]
     },
     {
-      "category": "Backend",
+      "category": "Architecture / System",
       "items": [
-        { "name": "Node.js", "level": 65 },
-        { "name": "Python", "level": 60 },
-        { "name": "MySQL", "level": 55 }
+        { "name": "Addressables", "level": 75 },
+        { "name": "Photon Fusion", "level": 70 },
+        { "name": "REST API", "level": 75 },
+        { "name": "Zenject", "level": 60 }
       ]
     },
     {
-      "category": "Tools",
+      "category": "Tools / DevOps",
       "items": [
         { "name": "Git", "level": 85 },
-        { "name": "Docker", "level": 50 },
-        { "name": "Figma", "level": 60 },
-        { "name": "AWS", "level": 45 }
+        { "name": "Jenkins", "level": 75 },
+        { "name": "Redmine", "level": 75 },
+        { "name": "Figma", "level": 65 }
       ]
     }
   ],
@@ -115,14 +115,18 @@
   ],
   "education": [
     {
-      "school": "한국대학교",
-      "major": "컴퓨터공학과",
-      "period": "2017.03 - 2021.02",
+      "school": "계명대학교",
+      "major": "게임 모바일 콘텐츠 공학과",
+      "period": "2010.02 - 2017.02",
       "description": "학사 졸업"
+    },
+    {
+      "school": "대구 제일 고등학교",
+      "period": "2007.02 - 2010.02"
     }
   ],
   "certificates": [],
   "contact": {
-    "email": "example@email.com"
+    "email": "mhjung0208@gmail.com"
   }
 }
