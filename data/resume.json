@@ -225,9 +225,9 @@
     },
     {
       "name": "SKT JUMP AR",
-      "description": "AR 카메라 콘텐츠 제공 및 촬영 이미지를 유저들과 공유하는 소셜 AR 카메라 앱",
+      "description": "AR 카메라를 활용한 컨텐츠를 촬영하고 소셜에 올려 다른 유저들과 함께 공유하는 서비스",
       "platform": "Mobile (iOS / Android)",
-      "techs": ["Unity", "Android", "iOS", "Swift", "Objective-C"],
+      "techs": ["Unity", "Android", "iOS"],
       "image": "data/Images/Projects/JumpAR/Logo.jpg",
       "links": [],
       "details": {
@@ -242,13 +242,137 @@
         "features": [
           { "text": "초기 AOS 타겟으로 제작된 Unity 프로젝트를 iOS에서 동작 가능하도록 Porting 작업" },
           { "text": "추 후 플랫폼 별 Native 프로젝트로 전환되면서 iOS 담당" },
-          { "text": "서버 통신" },
-          { "text": "TikTok과 비슷한 메커니즘의 뷰어 게시판 제작" }
+          { "text": "REST API 서버 통신하여 컨텐츠에 필요한 정보들 조회 및 다운로드" },
+          { "text": "릴스와 비슷한 메커니즘의 Infinity Viewer 개발" }
         ],
         "images": [
           "data/Images/Projects/JumpAR/Logo.jpg",
           "data/Images/Projects/JumpAR/Thumbnail_1.png",
           "data/Images/Projects/JumpAR/Thumbnail_2.png"
+        ]
+      }
+    },
+    {
+      "name": "SK K Project 살아있는 동화",
+      "description": "그리기·말하기 등 인터랙티브 콘텐츠를 제공하는 유아용 놀이 교육 어플리케이션",
+      "platform": "Mobile (iOS / Android)",
+      "techs": ["Unity", "Android", "iOS"],
+      "image": "data/Images/Projects/LivingFairyTale/Thumbnail_1.png",
+      "links": [],
+      "details": {
+        "company": "모프인터랙티브",
+        "period": "2018.02 - 2022.01",
+        "role": "클라이언트 개발",
+        "intro": [
+          "유아용 놀이 컨텐츠 어플리케이션",
+          "SK 셋탑박스와 페어링을 하여 모바일에서 제작된 저작물을 셋탑박스에서 동화와 동기화 시켜 시청 기능",
+          "Google Play Store, Apple Store 배포"
+        ],
+        "features": [
+          {
+            "text": "그리기 컨텐츠 작업",
+            "children": [
+              { "text": "Drawing 관련 플러그인 추가 및 앱 적용" }
+            ]
+          },
+          {
+            "text": "말하기 컨텐츠 작업",
+            "children": [
+              { "text": "앱 녹음 및 녹음 파일 데이터 Merge 작업" }
+            ]
+          },
+          { "text": "서버 통신 작업" },
+          { "text": "Native Webview 추가" },
+          { "text": "앱 전체 관리" },
+          { "text": "Android APK 빌드 및 배포" },
+          { "text": "iOS 빌드 및 TestFlight 배포" }
+        ],
+        "images": [
+          "data/Images/Projects/LivingFairyTale/Thumbnail_1.png",
+          "data/Images/Projects/LivingFairyTale/Thumbnail_2.png",
+          "data/Images/Projects/LivingFairyTale/Thumbnail_3.png"
+        ]
+      }
+    },
+    {
+      "name": "교원 구몬 스마트 이야기 수학",
+      "description": "유아 타겟의 교육용 수학 콘텐츠 어플리케이션",
+      "platform": "Mobile (iOS / Android)",
+      "techs": ["Unity", "Android", "iOS"],
+      "image": "data/Images/Projects/Kyowon_SmartMath/Thumbnail_1.png",
+      "links": [],
+      "details": {
+        "company": "모프인터랙티브",
+        "period": "2017.08 - 2018.02",
+        "role": "클라이언트 개발",
+        "intro": [
+          "유아 타겟으로 하는 교육용 컨텐츠",
+          "메인 컨테이너 + 컨텐츠 구성으로 진행",
+          "Google Play Store, Apple Store 배포"
+        ],
+        "features": [
+          { "text": "횡스크롤 게임 컨텐츠 작업" },
+          { "text": "애니메이션" }
+        ],
+        "images": [
+          "data/Images/Projects/Kyowon_SmartMath/Thumbnail_1.png",
+          "data/Images/Projects/Kyowon_SmartMath/Thumbnail_2.png"
+        ]
+      }
+    },
+    {
+      "name": "교원 솔루토이 한국사",
+      "description": "유아 타겟의 교육용 한국사 콘텐츠 어플리케이션",
+      "platform": "Mobile (iOS / Android)",
+      "techs": ["Unity", "Android", "iOS"],
+      "image": "data/Images/Projects/Kyowon_History/Thumbnail_1.png",
+      "links": [],
+      "details": {
+        "company": "모프인터랙티브",
+        "period": "2017.07 - 2017.09",
+        "role": "클라이언트 개발",
+        "intro": [
+          "유아 타겟으로 하는 교육용 컨텐츠",
+          "메인 컨테이너 + 컨텐츠 구성으로 진행",
+          "Google Play Store, Apple Store 배포"
+        ],
+        "features": [
+          { "text": "각 컨텐츠 진행 및 인터랙션 작업" },
+          { "text": "애니메이션" }
+        ],
+        "images": [
+          "data/Images/Projects/Kyowon_History/Thumbnail_1.png"
+        ]
+      }
+    },
+    {
+      "name": "SK T Real VR Editor",
+      "description": "Google Daydream VR 기반의 복셀 에디팅·커스터마이즈 및 Photon 멀티 플레이 시뮬레이션 프로젝트",
+      "platform": "Mobile (Android / Daydream VR)",
+      "techs": ["Unity", "Daydream"],
+      "image": "data/Images/Projects/TRealVREditor/Logo.png",
+      "links": [
+        { "title": "소개 영상", "url": "https://www.youtube.com/watch?app=desktop&v=dpPbPIuSg0s" }
+      ],
+      "details": {
+        "company": "모프인터랙티브",
+        "period": "2017.02 - 2017.07",
+        "role": "클라이언트 개발",
+        "intro": [
+          "Google IO 2017에 전시한 프로젝트",
+          "현재는 단종된 Google Daydream VR를 통해 복셀 에디팅 및 커스터마이즈",
+          "Photon을 통한 멀티 플레이 시뮬레이션"
+        ],
+        "features": [
+          { "text": "컨트롤러 관련 조작" },
+          { "text": "Photon 구현된 기능 버그 수정" }
+        ],
+        "images": [
+          "data/Images/Projects/TRealVREditor/Logo.png",
+          "data/Images/Projects/TRealVREditor/Thumbnail_1.png",
+          "data/Images/Projects/TRealVREditor/Thumbnail_2.png",
+          "data/Images/Projects/TRealVREditor/Thumbnail_3.png",
+          "data/Images/Projects/TRealVREditor/Thumbnail_4.png"
         ]
       }
     }
