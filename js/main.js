@@ -200,7 +200,10 @@ function renderExperience(experience) {
         <div class="absolute -left-[5px] top-1 w-[11px] h-[11px] rounded-full border-2 border-accent ${i === 0 ? 'bg-accent' : 'bg-warm-50'}"></div>
         <div class="glass-card rounded-2xl p-6 ml-4">
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-1">
-            <h3 class="text-lg font-semibold text-gray-900">${exp.company}</h3>
+            <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                ${exp.logo ? `<img src="${exp.logo}" alt="${exp.company} 로고" class="w-8 h-8 object-contain rounded-md flex-shrink-0" onerror="this.style.display='none'">` : ''}
+                ${exp.company}
+              </h3>
             <div class="flex flex-col sm:items-end gap-0.5">
               <span class="text-sm font-bold text-accent">${exp.period}</span>
               ${duration ? `<span class="text-xs font-semibold text-accent/70">${duration}</span>` : ''}

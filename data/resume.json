@@ -66,6 +66,7 @@
   "experience": [
     {
       "company": "알서포트",
+      "logo": "data/Images/Companies/Rsupport_Logo.png",
       "role": "유니티 개발자",
       "period": "2022.02.07 - 2025.12.31",
       "description": "메타버스 프로젝트 클라이언트 개발 및 Jenkins 빌드 환경 구축",
@@ -77,6 +78,7 @@
     },
     {
       "company": "모프인터랙티브",
+      "logo": "data/Images/Companies/MorphInteractive_Logo.png",
       "role": "유니티 개발자",
       "period": "2017.02.13 - 2022.01.22",
       "description": "모바일 어플리케이션 개발 및 배포 관리, 프로젝트 전체 관리",
