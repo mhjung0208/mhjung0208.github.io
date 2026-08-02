@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="정민화 Unity 클라이언트 개발자 포트폴리오">
+  <rect width="1200" height="630" fill="#f7f4ee"/>
+  <rect x="80" y="80" width="1040" height="470" rx="18" fill="#fffdf8" stroke="#d9d1c3" stroke-width="2"/>
+  <rect x="128" y="126" width="74" height="74" rx="12" fill="#0f766e"/>
+  <text x="165" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">JMH</text>
+  <text x="128" y="270" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="34" font-weight="700" fill="#0f766e">Unity Client Developer</text>
+  <text x="128" y="352" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="68" font-weight="800" fill="#17211f">정민화</text>
+  <text x="128" y="410" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="32" font-weight="600" fill="#5f6c68">실시간 협업 경험과 멀티플랫폼 클라이언트를 구현합니다.</text>
+  <g fill="#d9eeea" stroke="#0f766e" stroke-width="2">
+    <rect x="128" y="466" width="180" height="44" rx="22"/>
+    <rect x="326" y="466" width="150" height="44" rx="22"/>
+    <rect x="494" y="466" width="154" height="44" rx="22"/>
+  </g>
+  <g font-family="Arial, 'Noto Sans KR', sans-serif" font-size="20" font-weight="700" fill="#083f3b">
+    <text x="218" y="495" text-anchor="middle">Unity / C#</text>
+    <text x="401" y="495" text-anchor="middle">WebGL</text>
+    <text x="571" y="495" text-anchor="middle">Jenkins</text>
+  </g>
+  <g transform="translate(790 150)">
+    <rect x="0" y="0" width="230" height="64" rx="10" fill="#d9eeea" stroke="#0f766e" stroke-width="2"/>
+    <rect x="0" y="122" width="230" height="64" rx="10" fill="#fff" stroke="#d9d1c3" stroke-width="2"/>
+    <rect x="0" y="244" width="230" height="64" rx="10" fill="#fff" stroke="#d9d1c3" stroke-width="2"/>
+    <path d="M115 64v58M115 186v58" stroke="#0f766e" stroke-width="4"/>
+    <text x="115" y="40" text-anchor="middle" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="20" font-weight="700" fill="#083f3b">User Action</text>
+    <text x="115" y="162" text-anchor="middle" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="20" font-weight="700" fill="#17211f">Unity Client</text>
+    <text x="115" y="284" text-anchor="middle" font-family="Arial, 'Noto Sans KR', sans-serif" font-size="20" font-weight="700" fill="#17211f">Sync / Build</text>
+  </g>
+</svg>
