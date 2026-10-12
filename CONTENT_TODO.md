@@ -33,6 +33,6 @@
 ## 이력서 / 프로필
 
 - 필요한 정보: 공개 가능한 이력서 PDF 또는 URL, LinkedIn이나 기술 블로그 URL
-- 현재 임시 처리 방식: 작동하지 않는 이력서 버튼을 만들지 않았고, 이메일과 GitHub만 표시했습니다.
+- 현재 임시 처리 방식: 작동하지 않는 이력서 버튼을 만들지 않았고, 연락 수단은 이메일만 표시합니다(GitHub 링크는 2026-10-12 사용자 결정으로 삭제).
 - 사용 위치: Header CTA, Hero CTA, Contact 섹션
 - 입력 예시: `assets/resume.pdf`, `https://www.linkedin.com/in/...`, `https://blog...`

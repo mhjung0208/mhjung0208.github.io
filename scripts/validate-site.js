@@ -23,7 +23,7 @@ function checkRequiredFiles() {
     'js/main.js',
     'data/resume.json',
     'assets/favicon.svg',
-    'assets/og-image.svg',
+    'assets/og-image.png',
     'robots.txt',
     'sitemap.xml'
   ].forEach((file) => {
@@ -72,6 +72,38 @@ function checkData() {
 
   data.experience.forEach((item) => {
     if (item.logo && !exists(item.logo)) fail(`${item.company} 로고 파일을 찾을 수 없습니다: ${item.logo}`);
+  });
+
+  // resume.json 안의 모든 이미지 경로(갤러리·케이스 스터디 그림 포함)가 실제로 있는지
+  const imageRefs = new Set(JSON.stringify(data).match(/data\/[^"]*?\.(?:png|jpe?g|webp|gif|svg)/gi) || []);
+  imageRefs.forEach((ref) => {
+    if (!exists(ref)) fail(`참조 이미지 파일을 찾을 수 없습니다: ${ref}`);
+  });
+
+  checkCareerLabel(data);
+}
+
+// main.js calcWorkMonths 와 같은 규칙: 연·월 차이만 센다
+function workMonths(period) {
+  const [start, end] = String(period || '').split(' - ').map((s) => s.split('.').map(Number));
+  if (!start || !end) return 0;
+  return (end[0] - start[0]) * 12 + (end[1] - start[1]);
+}
+
+// 정적 메타(index.html, resume.json meta)의 경력 표기가 재직 기간 합계와 같은지 확인한다
+function checkCareerLabel(data) {
+  const months = data.experience.reduce((sum, item) => sum + workMonths(item.period), 0);
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  const label = [y ? `${y}년` : '', m ? `${m}개월` : ''].filter(Boolean).join(' ');
+  const html = read('index.html');
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+  [
+    ['index.html <title>', title],
+    ['resume.json meta.title', data.meta.title],
+    ['resume.json meta.description', data.meta.description]
+  ].forEach(([where, text]) => {
+    if (!String(text).includes(label)) fail(`${where} 경력 표기가 재직 기간 합계(${label})와 다릅니다: ${text}`);
   });
 }
 

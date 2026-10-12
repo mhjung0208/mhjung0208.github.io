@@ -5,12 +5,16 @@
   "description": "정민화 Unity 클라이언트 개발자 포트폴리오",
   "scripts": {
     "lint": "node scripts/validate-site.js",
-    "typecheck": "node --check js/main.js && node --check scripts/validate-site.js && node --check scripts/build-site.js && node --check scripts/serve-static.js",
+    "typecheck": "node --check js/main.js && node --check scripts/validate-site.js && node --check scripts/build-site.js && node --check scripts/serve-static.js && node --check scripts/optimize-images.js",
     "test": "node scripts/validate-site.js",
     "build": "node scripts/build-site.js",
-    "preview": "node scripts/serve-static.js 4173"
+    "preview": "node scripts/serve-static.js 4173",
+    "images": "node scripts/optimize-images.js"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "sharp": "0.34.3"
   }
 }

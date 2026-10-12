@@ -3,23 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이력서</title>
-  <meta name="description" content="">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
+  <!-- 크롤러·SNS 미리보기는 JS 를 실행하지 않으므로 메타 정보를 정적으로 둔다 (resume.json meta 와 같은 값) -->
+  <title>정민화 | 경력 8년 9개월 Unity 클라이언트 개발자</title>
+  <meta name="description" content="경력 8년 9개월 Unity 클라이언트 개발자 정민화의 프로젝트와 업무 이력을 정리한 포트폴리오입니다.">
+  <link rel="canonical" href="https://mhjung0208.github.io/">
+  <meta property="og:title" content="정민화 | 경력 8년 9개월 Unity 클라이언트 개발자">
+  <meta property="og:description" content="경력 8년 9개월 Unity 클라이언트 개발자 정민화의 프로젝트와 업무 이력을 정리한 포트폴리오입니다.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta name="theme-color" content="#e8604c">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:url" content="https://mhjung0208.github.io/">
+  <meta property="og:image" content="https://mhjung0208.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#faf7f2">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- Hero 이미지(LCP 후보)를 먼저 받아온다 -->
+  <link rel="preload" as="image" href="data/Images/hero-main.webp" imagesrcset="data/Images/hero-main-640.webp 640w, data/Images/hero-main.webp 1536w" imagesizes="(min-width: 1024px) 34vw, 60vw" fetchpriority="high">
+  <!-- 한글 본문 폰트: Pretendard Variable (버전 고정, 실패 시 시스템 폰트로 폴백) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Pretendard Variable"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', '"Apple SD Gothic Neo"', '"Malgun Gothic"', 'sans-serif']
+          },
           colors: {
-            accent: { DEFAULT: '#e8604c', light: '#ee7e6d', dark: '#d4503e' },
-            warm: { 50: '#faf7f2', 100: '#f3ede4', 200: '#e8dfd3' }
+            // accent: 장식·큰 글자용 / accent-ink: 작은 텍스트·링크용(미색 바탕 5.3:1) / accent-deep: 버튼 배경(흰 글자 5.6:1)
+            accent: { DEFAULT: '#e8604c', light: '#ee7e6d', dark: '#d4503e', ink: '#b4412f', deep: '#b4412f', deeper: '#93331f' },
+            warm: { 50: '#faf7f2', 100: '#f3ede4', 200: '#e8dfd3', 300: '#d6cbbc' },
+            // 회색도 미색 팔레트에 맞춘 따뜻한 회색으로 교체(500 이상은 본문 대비 4.5:1 이상)
+            gray: {
+              50: '#faf8f5', 100: '#f3efe9', 200: '#e6e0d7', 300: '#d3cbc0', 400: '#a1988c',
+              500: '#6b645c', 600: '#57514a', 700: '#433e38', 800: '#2f2b27', 900: '#211e1b'
+            }
           }
         }
       }
@@ -27,111 +47,122 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-warm-50 text-gray-700">
+<body class="bg-warm-50 text-gray-700 font-sans antialiased">
+
+  <a href="#main" class="skip-link">본문으로 건너뛰기</a>
 
   <!-- 네비게이션 -->
-  <nav id="navbar" class="fixed top-0 w-full bg-warm-50/80 backdrop-blur-md z-50 border-b border-warm-200/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <nav id="navbar" class="fixed top-0 w-full bg-warm-50 z-40 border-b border-warm-200" aria-label="주요 메뉴">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
       <div class="flex justify-between items-center h-16">
-        <a href="#hero" id="nav-logo" class="text-xl font-bold text-accent flex items-center gap-2">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span></span>
-        </a>
+        <a href="#hero" id="nav-logo" class="text-lg font-bold text-gray-900 tracking-tight"></a>
 
         <!-- 데스크톱 메뉴 -->
-        <div class="hidden md:flex items-center space-x-6">
-          <a href="#hero" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Home</a>
-          <a href="#about" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">About</a>
-          <a href="#experience" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Experience</a>
-          <a href="#skills" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Skills</a>
-          <a href="#projects" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Projects</a>
-          <a href="#education" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Education</a>
-          <a href="#contact" class="nav-link text-sm text-gray-500 hover:text-accent transition-colors">Contact</a>
+        <div class="hidden md:flex items-center gap-7">
+          <a href="#about" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">소개</a>
+          <a href="#experience" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">경력</a>
+          <a href="#skills" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">기술</a>
+          <a href="#projects" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">프로젝트</a>
+          <a href="#education" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">학력</a>
+          <a href="#contact" class="nav-link text-[15px] text-gray-600 hover:text-gray-900">연락</a>
         </div>
 
         <!-- 모바일 메뉴 버튼 -->
-        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-gray-500 hover:text-accent transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="menu-toggle" type="button" class="md:hidden w-11 h-11 -mr-2 rounded-md text-gray-700 flex items-center justify-center" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
       </div>
 
       <!-- 모바일 메뉴 -->
-      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-warm-200/50">
-        <a href="#hero" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Home</a>
-        <a href="#about" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">About</a>
-        <a href="#experience" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Experience</a>
-        <a href="#skills" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Skills</a>
-        <a href="#projects" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Projects</a>
-        <a href="#education" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Education</a>
-        <a href="#contact" class="mobile-nav-link block py-2.5 text-gray-600 hover:text-accent transition-colors">Contact</a>
+      <div id="mobile-menu" class="hidden md:hidden pb-3 border-t border-warm-200">
+        <a href="#about" class="mobile-nav-link block py-2.5 text-gray-700">소개</a>
+        <a href="#experience" class="mobile-nav-link block py-2.5 text-gray-700">경력</a>
+        <a href="#skills" class="mobile-nav-link block py-2.5 text-gray-700">기술</a>
+        <a href="#projects" class="mobile-nav-link block py-2.5 text-gray-700">프로젝트</a>
+        <a href="#education" class="mobile-nav-link block py-2.5 text-gray-700">학력</a>
+        <a href="#contact" class="mobile-nav-link block py-2.5 text-gray-700">연락</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero 섹션 -->
-  <section id="hero" class="pt-80 pb-[17rem] flex items-center relative overflow-visible">
-    <div class="hero-grid-bg absolute inset-0"></div>
-    <div id="hero-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10"></div>
-  </section>
+  <main id="main">
+    <!-- Hero 섹션: 이름·직무·경력 기간·연락처를 첫 화면에 -->
+    <section id="hero" class="hero" aria-label="소개 요약">
+      <div id="hero-content" class="max-w-6xl mx-auto px-5 sm:px-8"></div>
+    </section>
 
-  <!-- About Me 섹션 -->
-  <section id="about" class="py-20 bg-white fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">About <span class="text-accent">Me</span></h2>
-      <div id="about-content"></div>
-    </div>
-  </section>
+    <!-- 섹션 공통 구조: 왼쪽 한글 제목 + 작은 영문 라벨, 오른쪽 본문 -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="about-title" class="section-title">소개</h2>
+          <p class="section-label" lang="en">About</p>
+        </header>
+        <div id="about-content" class="section-body"></div>
+      </div>
+    </section>
 
-  <!-- Experience 섹션 -->
-  <section id="experience" class="py-20 fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Work <span class="text-accent">Experience</span></h2>
-      <div id="experience-content"></div>
-    </div>
-  </section>
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="experience-title" class="section-title">경력</h2>
+          <p class="section-label" lang="en">Experience</p>
+        </header>
+        <div id="experience-content" class="section-body"></div>
+      </div>
+    </section>
 
-  <!-- Skills 섹션 -->
-  <section id="skills" class="py-20 bg-white fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Skills</span></h2>
-      <div id="skills-content"></div>
-    </div>
-  </section>
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="skills-title" class="section-title">기술</h2>
+          <p class="section-label" lang="en">Skills</p>
+        </header>
+        <div id="skills-content" class="section-body"></div>
+      </div>
+    </section>
 
-  <!-- Projects 섹션 -->
-  <section id="projects" class="py-20 fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Projects</span></h2>
-      <div id="projects-content"></div>
-    </div>
-  </section>
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="projects-title" class="section-title">프로젝트</h2>
+          <p class="section-label" lang="en">Projects</p>
+        </header>
+        <div id="projects-content" class="section-body"></div>
+      </div>
+    </section>
 
-  <!-- Education 섹션 -->
-  <section id="education" class="py-20 bg-white fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">My <span class="text-accent">Education</span></h2>
-      <div id="education-content"></div>
-    </div>
-  </section>
+    <section id="education" class="section" aria-labelledby="education-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="education-title" class="section-title">학력</h2>
+          <p class="section-label" lang="en">Education</p>
+        </header>
+        <div id="education-content" class="section-body"></div>
+      </div>
+    </section>
 
-  <!-- Contact 섹션 -->
-  <section id="contact" class="py-20 fade-in">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Contact <span class="text-accent">Me</span></h2>
-      <div id="contact-content"></div>
-    </div>
-  </section>
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 id="contact-title" class="section-title">연락</h2>
+          <p class="section-label" lang="en">Contact</p>
+        </header>
+        <div id="contact-content" class="section-body"></div>
+      </div>
+    </section>
+  </main>
 
   <!-- 푸터 -->
-  <footer class="py-8 border-t border-warm-200/50 text-center text-sm text-gray-400">
+  <footer class="py-8 border-t border-warm-200 text-center text-sm text-gray-500">
     <p id="footer-text"></p>
   </footer>
 
   <!-- 스크롤 상단 이동 버튼 -->
-  <button id="scroll-top" class="fixed bottom-6 right-6 w-12 h-12 bg-accent text-white rounded-full shadow-lg shadow-accent/25 hover:bg-accent-light transition-colors flex items-center justify-center z-40" aria-label="맨 위로 이동">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <button id="scroll-top" type="button" class="fixed bottom-6 right-6 w-12 h-12 bg-accent-deep text-white rounded-full shadow-md hover:bg-accent-deeper flex items-center justify-center z-30" aria-label="맨 위로 이동">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>
   </button>

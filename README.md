@@ -24,14 +24,14 @@ npx serve .
 ```
 data/resume.json
 ├── meta        — 사이트 제목, 설명, OG 이미지
-├── hero        — 이름, 직함, 한 줄 소개
+├── hero        — 이름, 직함, 한 줄 소개 (경력 기간은 experience 재직 기간 합계로 자동 계산)
 ├── about       — 자기소개, 프로필 이미지, 하이라이트
 ├── skills      — 기술 스택 (카테고리별)
 ├── experience  — 경력 사항
 ├── projects    — 프로젝트 목록
 ├── education   — 학력
 ├── certificates — 자격증
-└── contact     — 이메일, GitHub, LinkedIn 등
+└── contact     — 이메일
 ```
 
 ## 주요 기능
