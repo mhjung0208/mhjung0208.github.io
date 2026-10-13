@@ -254,7 +254,9 @@ function projectTagsHtml(techs) {
 }
 
 // 모든 프로젝트를 resume.json 순서(최신순) 그대로 같은 가로형 카드로 보여준다
-function renderProjects(projects) {
+// resume.json 에서 "hidden": true 인 프로젝트는 데이터만 남기고 화면에서 숨긴다
+function renderProjects(allProjects) {
+  const projects = allProjects.filter(proj => !proj.hidden);
   const cardsHtml = projects.map((proj, idx) => `
     <li class="project-card glass-card">
       ${projectThumbHtml(proj, '(min-width: 768px) 560px, 100vw', 'project-card-media')}
@@ -265,7 +267,7 @@ function renderProjects(projects) {
         </h3>
         <p class="project-desc">${escapeHtml(proj.description)}</p>
         ${projectTagsHtml(proj.techs)}
-        <span class="project-more" aria-hidden="true">${proj.caseStudy ? '케이스 스터디 읽기' : '자세히 보기'}</span>
+        <span class="project-more" aria-hidden="true">${proj.showcase ? '개발 과정 보기' : proj.caseStudy ? '케이스 스터디 읽기' : '자세히 보기'}</span>
       </div>
     </li>`).join('');
 
@@ -348,10 +350,14 @@ function openProjectModal(proj) {
 
   // caseStudy 필드가 있는 프로젝트만 케이스 스터디 레이아웃(넓은 모달 + 섹션 구성)으로 렌더링
   const caseStudy = proj.caseStudy;
-  const modalWidthClass = caseStudy ? 'max-w-4xl' : 'max-w-3xl';
-  const bodyHtml = caseStudy
-    ? renderCaseStudy(caseStudy, galleryImages, proj.name) + linksSection
-    : `${imageSection}
+  // showcase 필드가 있으면 상단(제목·속성·갤러리)은 기존 포맷 그대로 두고 본문만 새 구성(renderShowcase)으로 그린다
+  const showcase = proj.showcase;
+  const modalWidthClass = caseStudy || showcase ? 'max-w-4xl' : 'max-w-3xl';
+  const bodyHtml = showcase
+    ? imageSection + renderShowcase(showcase) + linksSection
+    : caseStudy
+      ? renderCaseStudy(caseStudy, galleryImages, proj.name) + linksSection
+      : `${imageSection}
           ${introSection}
           ${featuresSection}
           ${linksSection}`;
@@ -388,7 +394,7 @@ function openProjectModal(proj) {
 
   const box = container.querySelector('.project-modal-box');
   initGallery(container);
-  if (caseStudy) {
+  if (caseStudy || showcase) {
     initCaseStudyFigures(container);
     initCaseStudyToc(box);
   }
@@ -837,6 +843,170 @@ function renderCaseStudyLinear(cs, fallbackImages, projectName) {
           ${section.html}
         </section>`).join('')}
     </div>`;
+}
+
+// ── 개발 과정 모달 (projects[].showcase) ──────────────────────────────────────
+// 상단(제목·속성 표·갤러리)은 기존 모달과 같고, 그 아래 본문만 카드·표·단계 블록으로 그린다.
+// 각 섹션은 cs-section 마크업을 재사용해 번호와 sticky 목차(initCaseStudyToc)가 그대로 동작한다.
+// 문자열은 모두 escape 후 삽입하며 `백틱`은 인라인 코드, **굵게**는 하이라이트(mark)로 표시한다.
+
+function formatShowcaseText(value) {
+  return formatCaseText(value).replace(/\*\*([^*]+)\*\*/g, '<mark class="sc-mark">$1</mark>');
+}
+
+// 라벨 | 본문 행 목록 (cards, steps, cases 에서 공통 사용)
+function renderShowcaseRows(rows) {
+  return `
+    <dl class="sc-rows">
+      ${rows.map(row => `
+        <div class="sc-row">
+          <dt>${formatShowcaseText(row.label)}</dt>
+          <dd>${formatShowcaseText(row.text)}</dd>
+        </div>`).join('')}
+    </dl>`;
+}
+
+function renderShowcaseBullets(items) {
+  return `
+    <ul class="sc-bullets">
+      ${items.map(text => `<li>${formatShowcaseText(text)}</li>`).join('')}
+    </ul>`;
+}
+
+// 블록 type → HTML. 데이터에 있는 요소만 그린다.
+const SHOWCASE_BLOCKS = {
+  hero: b => `
+    <div class="sc-hero">
+      ${b.eyebrow ? `<p class="sc-hero-eyebrow">${formatShowcaseText(b.eyebrow)}</p>` : ''}
+      <p class="sc-hero-headline">${formatShowcaseText(b.headline)}</p>
+      ${[].concat(b.sub || []).map(line => `<p class="sc-hero-sub">${formatShowcaseText(line)}</p>`).join('')}
+    </div>`,
+
+  kpis: b => `
+    <div class="sc-kpis${b.columns === 3 ? ' sc-kpis-3' : ''}">
+      ${b.items.map(k => `
+        <div class="sc-kpi">
+          <div class="sc-kpi-value">${formatShowcaseText(k.value)}</div>
+          <div class="sc-kpi-label">${formatShowcaseText(k.label)}</div>
+          ${k.note ? `<div class="sc-kpi-note">${formatShowcaseText(k.note)}</div>` : ''}
+        </div>`).join('')}
+    </div>`,
+
+  stats: b => `
+    <ul class="sc-stats">
+      ${b.items.map(s => `<li><strong>${formatShowcaseText(s.value)}</strong><span>${formatShowcaseText(s.label)}</span></li>`).join('')}
+    </ul>`,
+
+  callout: b => `
+    <div class="sc-callout${b.tone === 'muted' ? ' sc-callout-muted' : ''}">
+      ${b.label ? `<span class="sc-callout-label">${formatShowcaseText(b.label)}</span>` : ''}
+      ${(b.lines || [b.text]).map(line => `<p>${formatShowcaseText(line)}</p>`).join('')}
+    </div>`,
+
+  note: b => `<p class="sc-note">${formatShowcaseText(b.text)}</p>`,
+
+  cards: b => `
+    <div class="sc-cards${b.columns === 2 ? ' sc-cards-2' : ''}">
+      ${b.items.map(c => `
+        <div class="sc-card">
+          ${c.tag ? `<span class="sc-tag">${formatShowcaseText(c.tag)}</span>` : ''}
+          ${c.title ? `<p class="sc-card-title">${formatShowcaseText(c.title)}</p>` : ''}
+          ${(c.rows || []).length ? renderShowcaseRows(c.rows) : ''}
+          ${(c.bullets || []).length ? renderShowcaseBullets(c.bullets) : ''}
+        </div>`).join('')}
+    </div>`,
+
+  steps: b => `
+    <ol class="sc-steps">
+      ${b.items.map(st => `
+        <li class="sc-step">
+          <div class="sc-step-head">
+            <span class="sc-step-num" aria-hidden="true">${escapeHtml(st.step)}</span>
+            <div>
+              <p class="sc-card-title">${formatShowcaseText(st.title)}</p>
+              <p class="sc-step-period">${formatShowcaseText(st.period)}</p>
+            </div>
+          </div>
+          ${renderShowcaseRows(st.rows || [])}
+          ${st.metric ? `<p class="sc-step-metric">${formatShowcaseText(st.metric)}</p>` : ''}
+        </li>`).join('')}
+    </ol>`,
+
+  flow: b => `
+    <ol class="sc-flow${b.single ? ' sc-flow-line' : ''}">
+      ${b.items.map(t => `<li>${formatShowcaseText(t)}</li>`).join('')}
+    </ol>
+    ${b.note ? `<p class="sc-note">${formatShowcaseText(b.note)}</p>` : ''}`,
+
+  // wrap: 긴 문장 열을 줄바꿈하고, 좁은 화면에서는 행을 카드처럼 쌓아 가로 스크롤을 없앤다
+  // widths: 열 너비(CSS 길이) 배열, 비워 두면 내용에 맞춘다
+  table: b => `
+    <div class="cs-table-wrap">
+      <table class="cs-table${b.wrap ? ' sc-table' : ''}">
+        ${b.widths ? `<colgroup>${b.widths.map(w => `<col${w ? ` style="width:${escapeHtml(w)}"` : ''}>`).join('')}</colgroup>` : ''}
+        <thead><tr>${b.headers.map(h => `<th>${formatShowcaseText(h)}</th>`).join('')}</tr></thead>
+        <tbody>${b.rows.map(row => `<tr>${row.map((cell, i) => `<td data-label="${escapeHtml(b.headers[i] || '')}">${formatShowcaseText(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+    </div>
+    ${b.note ? `<p class="sc-note">${formatShowcaseText(b.note)}</p>` : ''}`,
+
+  // 값 크기를 막대로 비교한다. budget 은 기준선(60fps 예산), 기준선을 넘으면 강조색
+  bars: b => {
+    const pct = v => Math.min(100, Math.max(0, (v / b.max) * 100));
+    return `
+      <ul class="sc-bars">
+        ${b.items.map(it => `
+          <li class="sc-bar-row${b.budget != null && it.value > b.budget ? ' is-over' : ''}">
+            <div class="sc-bar-label">${formatShowcaseText(it.label)}</div>
+            <div class="sc-bar-track" aria-hidden="true">
+              <span class="sc-bar-fill" style="width:${pct(it.value).toFixed(1)}%"></span>
+              ${b.budget != null ? `<span class="sc-bar-budget" style="left:${pct(b.budget).toFixed(1)}%"></span>` : ''}
+            </div>
+            <div class="sc-bar-value">${formatShowcaseText(it.text)}${it.note ? `<small>${formatShowcaseText(it.note)}</small>` : ''}</div>
+          </li>`).join('')}
+      </ul>
+      ${b.budget != null ? `<p class="sc-note">세로선은 ${formatShowcaseText(b.budgetLabel || String(b.budget) + (b.unit || ''))}, 이 선을 넘으면 막대를 강조색으로 표시</p>` : ''}`;
+  },
+
+  bullets: b => renderShowcaseBullets(b.items),
+
+  cases: b => `
+    <div class="sc-cases">
+      ${b.items.map((c, i) => `
+        <article class="sc-card sc-case">
+          <p class="sc-case-head">
+            <span class="sc-case-num">#${i + 1}</span>
+            ${c.tag ? `<span class="sc-tag">${formatShowcaseText(c.tag)}</span>` : ''}
+          </p>
+          <p class="sc-card-title">${formatShowcaseText(c.title)}</p>
+          ${renderShowcaseRows(c.rows || [])}
+        </article>`).join('')}
+    </div>`,
+
+  figures: b => renderCaseFigures(b.items)
+};
+
+function renderShowcaseBlock(block) {
+  const render = SHOWCASE_BLOCKS[block.type];
+  if (!render) return '';
+  const title = block.caption || block.title;
+  return `
+    <div class="sc-block">
+      ${title ? `<p class="sc-sub">${formatShowcaseText(title)}</p>` : ''}
+      ${render(block)}
+    </div>`;
+}
+
+function renderShowcase(sc) {
+  return (sc.sections || []).map((section, i) => `
+    <section class="cs-section">
+      <h3 class="cs-section-title">
+        <span class="cs-section-num">${String(i + 1).padStart(2, '0')}</span>
+        ${formatShowcaseText(section.title)}
+      </h3>
+      ${section.lead ? `<p class="sc-lead">${formatShowcaseText(section.lead)}</p>` : ''}
+      ${(section.blocks || []).map(renderShowcaseBlock).join('')}
+    </section>`).join('');
 }
 
 // 케이스 스터디 인라인 이미지 클릭 시 라이트박스(모달 내 모든 figure 를 순서대로 탐색)

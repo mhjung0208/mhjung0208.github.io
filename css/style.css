@@ -1219,6 +1219,574 @@ hr + .cs-section .cs-section-title,
   margin-bottom: 0.35rem;
 }
 
+/* ── 개발 과정 모달 (projects[].showcase) ──
+   Hallmark · component: project showcase modal · genre: editorial · theme: site tokens (paper #faf7f2 · coral accent) · tone: technical
+   states: default · focus-visible (전역 :focus-visible) · contrast: pass (accent-ink / ink 위주, 어두운 hero 는 흰 글자)
+   상단(제목·속성·갤러리)은 기존 모달과 같고, 본문은 hero → KPI 카드 → 단계·표·사례 블록으로 구성한다. */
+.sc-lead {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+.sc-block + .sc-block {
+  margin-top: 1.75rem;
+}
+
+.sc-sub {
+  margin-bottom: 0.65rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sc-note {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* **강조** — 형광펜처럼 글자 아래쪽만 칠한다 */
+.sc-mark {
+  padding: 0 0.1em;
+  background: linear-gradient(transparent 58%, rgba(232, 96, 76, 0.3) 58%);
+  color: inherit;
+  font-weight: 700;
+}
+
+/* 첫 화면: 어두운 띠로 한 줄 결론을 먼저 보여 준다 */
+.sc-hero {
+  padding: 1.5rem 1.4rem;
+  border-radius: 0.9rem;
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.sc-hero-eyebrow {
+  margin-bottom: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f4a496;
+}
+
+.sc-hero-headline {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+.sc-hero .sc-mark {
+  background: linear-gradient(transparent 55%, rgba(232, 96, 76, 0.65) 55%);
+  color: #ffffff;
+}
+
+.sc-hero-sub {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+@media (min-width: 640px) {
+  .sc-hero {
+    padding: 1.8rem 2rem;
+  }
+
+  .sc-hero-headline {
+    font-size: 1.65rem;
+  }
+}
+
+/* KPI 카드 */
+.sc-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .sc-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 559px) {
+  .sc-kpis-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 560px) {
+  .sc-kpis-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.sc-kpi {
+  padding: 0.9rem 1rem 1rem;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: 0.6rem;
+  background: var(--paper);
+}
+
+.sc-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--accent-ink);
+}
+
+.sc-kpi-label {
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.sc-kpi-note {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* 규모 칩 */
+.sc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sc-stats li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.sc-stats strong {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 한 줄 강조 상자 */
+.sc-callout {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  background: var(--paper-2);
+}
+
+.sc-callout-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-ink);
+}
+
+.sc-callout p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* 여러 줄(lines)은 줄마다 띄워서 한눈에 읽는다 */
+.sc-callout p + p {
+  margin-top: 0.7rem;
+}
+
+.sc-callout-muted {
+  background: var(--paper);
+}
+
+.sc-callout-muted p {
+  color: var(--ink-2);
+}
+
+/* 카드 · 태그 · 라벨 행 */
+.sc-cards,
+.sc-cases {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .sc-cards-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.sc-card,
+.sc-step {
+  min-width: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  background: #ffffff;
+}
+
+.sc-tag {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+.sc-card > .sc-tag {
+  margin-bottom: 0.5rem;
+}
+
+.sc-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.sc-card-title + .sc-rows,
+.sc-step-head + .sc-rows {
+  margin-top: 0.6rem;
+}
+
+.sc-row {
+  display: grid;
+  gap: 0.1rem 0.9rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--paper-2);
+}
+
+.sc-row:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 520px) {
+  .sc-row {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+  }
+}
+
+.sc-row dt {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--accent-ink);
+}
+
+.sc-row dd {
+  margin: 0;
+  min-width: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.sc-bullets li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.sc-bullets li + li {
+  margin-top: 0.4rem;
+}
+
+.sc-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.sc-card > .sc-bullets {
+  margin-top: 0.5rem;
+}
+
+/* 단계 카드(협업 방식 ①②③) */
+.sc-steps {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 900px) {
+  .sc-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+  }
+
+  .sc-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    top: 1.25rem;
+    right: -1.15rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+  }
+}
+
+.sc-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-step-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.sc-step-num {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--accent-ink);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.sc-step-period {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.sc-step-metric {
+  margin-top: auto;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.5rem;
+  background: var(--paper-2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--accent-ink);
+}
+
+.sc-step .sc-rows {
+  margin-bottom: 0.8rem;
+}
+
+/* 3열 카드는 폭이 좁아 라벨을 본문 위에 쌓는다 */
+.sc-step .sc-row {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 순서 흐름 */
+.sc-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+}
+
+.sc-flow li {
+  position: relative;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.sc-flow li:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  top: 50%;
+  right: -1.2rem;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+/* 한 줄로 표시하는 순서 흐름(넓은 화면) */
+@media (min-width: 768px) {
+  .sc-flow-line {
+    flex-wrap: nowrap;
+    gap: 0 1.3rem;
+  }
+
+  .sc-flow-line li {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+    font-size: 0.8125rem;
+  }
+
+  .sc-flow-line li:not(:last-child)::after {
+    right: -1rem;
+  }
+}
+
+/* 줄바꿈 표(긴 문장 열) — 좁은 화면에서는 행을 카드처럼 쌓아 가로 스크롤을 없앤다 */
+.cs-table.sc-table {
+  min-width: 0;
+}
+
+@media (max-width: 639px) {
+  .sc-table thead {
+    display: none;
+  }
+
+  .sc-table,
+  .sc-table tbody,
+  .sc-table tr,
+  .sc-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .sc-table tr {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sc-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .sc-table td {
+    padding: 0.25rem 0;
+    border: 0;
+  }
+
+  .sc-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+  }
+
+  /* 첫 칸은 카드 제목처럼 쓰므로 라벨을 숨긴다 */
+  .sc-table td:first-child {
+    font-weight: 700;
+  }
+
+  .sc-table td:first-child::before {
+    display: none;
+  }
+}
+
+.sc-table th,
+.sc-table td {
+  white-space: normal;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.sc-table td:first-child {
+  color: var(--ink);
+}
+
+/* 막대 비교 */
+.sc-bars {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sc-bar-row {
+  display: grid;
+  gap: 0.2rem 0.9rem;
+  align-items: center;
+}
+
+@media (min-width: 720px) {
+  .sc-bar-row {
+    grid-template-columns: 9.5rem minmax(0, 1fr) 11rem;
+  }
+}
+
+.sc-bar-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sc-bar-track {
+  position: relative;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: var(--paper-2);
+}
+
+.sc-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--ink-2);
+}
+
+.sc-bar-row.is-over .sc-bar-fill {
+  background: var(--accent);
+}
+
+.sc-bar-budget {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--ink);
+}
+
+.sc-bar-value {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-bar-value small {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* 트러블슈팅 사례 */
+.sc-case-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.sc-case-num {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--accent-ink);
+}
+
 @keyframes modal-fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
