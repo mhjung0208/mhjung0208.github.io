@@ -1327,6 +1327,17 @@ hr + .cs-section .cs-section-title,
   }
 }
 
+/* 4개 카드는 넓은 화면에서 한 줄 */
+@media (min-width: 900px) {
+  .sc-kpis-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .sc-kpis-4 .sc-kpi-value {
+    font-size: 1.35rem;
+  }
+}
+
 .sc-kpi {
   padding: 0.9rem 1rem 1rem;
   border: 1px solid var(--rule);
@@ -1638,6 +1649,9 @@ hr + .cs-section .cs-section-title,
   .sc-flow-line li {
     flex: 1 1 0;
     min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-size: 0.8125rem;
   }

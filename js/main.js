@@ -883,7 +883,7 @@ const SHOWCASE_BLOCKS = {
     </div>`,
 
   kpis: b => `
-    <div class="sc-kpis${b.columns === 3 ? ' sc-kpis-3' : ''}">
+    <div class="sc-kpis${b.columns === 3 ? ' sc-kpis-3' : b.columns === 4 ? ' sc-kpis-4' : ''}">
       ${b.items.map(k => `
         <div class="sc-kpi">
           <div class="sc-kpi-value">${formatShowcaseText(k.value)}</div>

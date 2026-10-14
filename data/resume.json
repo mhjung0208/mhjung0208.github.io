@@ -1647,13 +1647,668 @@
     },
     {
       "name": "Rfice",
+      "description": "채팅·음성·화상·협업을 3D 가상 공간에 통합한 메신저형 메타버스. 공간 커스텀(Props)·오브젝트 스폰 동기화·화이트보드·Addressables 리소스 로딩·미니게임(Rivor) 클라이언트 개발 담당",
+      "platform": "PC / Mobile / WebGL",
+      "techs": [
+        "Unity",
+        "C#",
+        "Photon Fusion 2",
+        "Addressables",
+        "Zenject",
+        "WebGL",
+        "Android",
+        "iOS"
+      ],
+      "image": "data/Images/Projects/Rfice/Logo-640.webp",
+      "links": [],
+      "details": {
+        "company": "알서포트",
+        "period": "2022.02 - 2025.12.31",
+        "role": "클라이언트 개발",
+        "images": [
+          "data/Images/Projects/Rfice/Thumbnail_1.webp",
+          "data/Images/Projects/Rfice/Thumbnail_2.webp",
+          "data/Images/Projects/Rfice/Thumbnail_3.webp",
+          "data/Images/Projects/Rfice/Thumbnail_4.webp",
+          "data/Images/Projects/Rfice/Thumbnail_5.webp",
+          "data/Images/Projects/Rfice/Thumbnail_6.webp",
+          "data/Images/Projects/Rfice/Thumbnail_7.webp",
+          "data/Images/Projects/Rfice/Thumbnail_8.webp"
+        ]
+      },
+      "showcase": {
+        "sections": [
+          {
+            "title": "한눈에 보기",
+            "blocks": [
+              {
+                "type": "hero",
+                "eyebrow": "Unity · Photon Fusion 2 · Addressables · WebGL / Android / iOS",
+                "headline": "**메신저 기반의 3D 가상 공간 협업 플랫폼** 프로젝트",
+                "sub": [
+                  "채팅·음성·화상·협업을 3D 가상 공간에 통합한 메신저형 메타버스. 설치 없이 브라우저(WebGL)에서 접속하고 Android·iOS도 지원",
+                  "공간 커스텀(Props) · 오브젝트 스폰 동기화 · 화이트보드 · Addressables 리소스 로딩 · 미니게임 룰 개발 담당"
+                ]
+              },
+              {
+                "type": "kpis",
+                "columns": 4,
+                "items": [
+                  {
+                    "value": "Addressables",
+                    "label": "리소스 동적 로딩 · 관리",
+                    "note": "다운로드 체인, 씬별 프리로드, 환경별 프로필"
+                  },
+                  {
+                    "value": "Fusion",
+                    "label": "실시간 네트워크 동기화",
+                    "note": "Shared Mode, 오브젝트 · 화이트보드 상태 동기화"
+                  },
+                  {
+                    "value": "멀티 플랫폼",
+                    "label": "WebGL · Android · iOS",
+                    "note": "조작 · UI · 로딩을 플랫폼별로 구성"
+                  },
+                  {
+                    "value": "공간 커스텀",
+                    "label": "마이룸 Props 배치 · 저장",
+                    "note": "데이터 기반 UI와 런타임 배치"
+                  }
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "담당 기능",
+                "headers": [
+                  "영역",
+                  "담당 내용",
+                  "상세"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null,
+                  "4rem"
+                ],
+                "rows": [
+                  [
+                    "**공간 커스텀 (Props)**",
+                    "배치 오브젝트 데이터 구조 설계·관리, 카테고리 데이터 기반 UI 동적 구성, 런타임 생성·배치·편집·저장",
+                    "03"
+                  ],
+                  [
+                    "**오브젝트 스폰 · 동기화**",
+                    "프리뷰 → 네트워크 스폰 흐름, Fusion `[Networked]` 구조체 + RPC로 메타데이터 동기화, 권한별 오브젝트바",
+                    "04"
+                  ],
+                  [
+                    "**Addressables 리소스 관리**",
+                    "다운로드 크기 확인 → 의존성 다운로드 → 타입별 프리로드 체인, 씬별 Preload 레이블, 환경별 프로필·카탈로그",
+                    "05"
+                  ],
+                  [
+                    "**화이트보드**",
+                    "공간·플로팅 화이트보드 타입, 함께보기·확대 모드와 소유자 변경 동기화, 늦게 입장한 사용자 상태 전달. 드로잉 툴·드로잉 동기화는 Unity에서 개발 후 웹 FE로 이전",
+                    "04"
+                  ],
+                  [
+                    "**미니게임 (Rivor)**",
+                    "미니게임 룰 4종 개발(DeathRoll · HyperBoard · HyperBoardTeam · StairRun), Rfice 안에서 개발하다 별도 프로젝트(Rivor)로 분리되어 진행",
+                    "06"
+                  ],
+                  [
+                    "**CI/CD**",
+                    "Jenkins 3단 파이프라인과 Dev · Alpha · Prod 배포 자동화 — 별도 항목 **Rfice Jenkins CI/CD** 참고",
+                    "—"
+                  ]
+                ]
+              },
+              {
+                "type": "callout",
+                "label": "역할",
+                "lines": [
+                  "**담당** — Unity 클라이언트 개발, 위 표의 영역",
+                  "**활용** — Photon Fusion 2(네트워크), Zenject(DI), Addressables, Lean Localization, DOTween",
+                  "**연동** — 파일 업로드·화이트보드 UI·알림은 웹 FE와 JSON 명령 브리지로 연동, 배치 데이터는 REST API로 서버 저장"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "아키텍처와 담당 시스템",
+            "lead": "MVP 패턴과 Repository 패턴을 활용한 구조로 설계",
+            "blocks": [
+              {
+                "type": "figures",
+                "items": [
+                  {
+                    "src": "data/Images/Projects/Rfice/11. Architecture.webp",
+                    "wide": true,
+                    "caption": "Presentation · Domain · Data 3계층 구조. Presenter가 Interactor를 호출하고 Repository가 DataSource를 조합하며 Zenject로 의존성 주입"
+                  }
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "담당 시스템 — 요구 · 설계 · 결과",
+                "headers": [
+                  "시스템",
+                  "요구",
+                  "설계",
+                  "결과"
+                ],
+                "wrap": true,
+                "widths": [
+                  "8rem",
+                  "24%",
+                  null,
+                  "24%"
+                ],
+                "rows": [
+                  [
+                    "**공간 커스텀**",
+                    "기획이 프랍을 계속 추가하고, 사용자는 가구·장식을 자유 배치·저장",
+                    "JSON → ScriptableObject 데이터, 배치 타입 · 부가 기능에 따라 컴포넌트 자동 부착, 배치 정보를 직렬화해 저장",
+                    "프랍 197종을 코드 수정 없이 데이터로 관리, 마이룸 입장 시 같은 데이터로 복원"
+                  ],
+                  [
+                    "**오브젝트 스폰**",
+                    "이미지·영상·문서·링크 등 타입이 다른 오브젝트를 공간에 배치하고 모두에게 동일하게 표시",
+                    "타입 체계, 프리뷰 확정 후 네트워크 스폰, 메타데이터는 네트워크 구조체 + RPC로 동기화",
+                    "늦게 입장한 클라이언트도 네트워크 상태에서 자동 복원, 오브젝트바는 플랫폼·권한별 SO 데이터로 구성"
+                  ],
+                  [
+                    "**화이트보드**",
+                    "회의 중 공유 화이트보드를 공간 오브젝트와 플로팅 창 두 형태로 제공",
+                    "스폰 타입 2종 + 플로팅 뷰어 아이템, 함께보기·확대 모드를 Fusion 채널 이벤트로 전파",
+                    "소유자 변경·닫기 프로토콜과 신규 입장자 상태 전달까지 한 흐름으로 처리"
+                  ],
+                  [
+                    "**Addressables**",
+                    "WebGL 초기 용량을 줄이고 환경(Dev · Alpha · Prod)별로 리소스를 분리",
+                    "리소스 타입별 책임 연쇄, 씬별 프리로드 레이블, 프로필 경로에 환경 · 버전 바인딩",
+                    "진행률 통합 표시, 빌드 한 번으로 서버별 카탈로그 생성"
+                  ],
+                  [
+                    "**Rivor**",
+                    "플랫폼 안에서 바로 즐기는 멀티플레이 미니게임",
+                    "공통 룰 베이스를 상속하고 룰별 메시지 채널로 클라이언트 · 서버 이벤트 전달, 서버 권한(StateAuthority)에서만 판정 · 전파",
+                    "룰 4종(DeathRoll · HyperBoard · HyperBoardTeam · StairRun) 개발"
+                  ]
+                ]
+              },
+              {
+                "type": "figures",
+                "items": [
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_1.webp",
+                    "caption": "오픈월드 '모두의 공원' 캠핑 구역. 하단은 화상·마이크·이모지·채팅·게임 등 커뮤니케이션 바"
+                  },
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_2.webp",
+                    "caption": "오픈월드 해변 구역. 부두 위 아바타와 하단의 낚시 버튼"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "공간 커스텀 (Props)",
+            "lead": "마이룸 꾸미기. 기획 데이터(JSON)에서 UI와 런타임 생성까지 한 흐름으로 이어지고, 배치 결과는 서버에 저장되어 다른 참가자의 마이룸 입장 시 복원",
+            "blocks": [
+              {
+                "type": "flow",
+                "title": "불러오기 흐름 (Load)",
+                "items": [
+                  "입장한 룸 ID로 저장된 배치 조회 (REST)",
+                  "스카이박스 · 프랍 에셋 로드 (Addressables)",
+                  "런타임 생성 및 배치 (로딩)",
+                  "편집 UI 구성 (편집 시)"
+                ]
+              },
+              {
+                "type": "flow",
+                "title": "저장 흐름 (Save)",
+                "items": [
+                  "공간 편집 (배치 · 이동 · 회전 · 삭제)",
+                  "배치 목록 직렬화",
+                  "저장 요청 (중복 차단 · REST)",
+                  "성공 시 갱신"
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "데이터 구조",
+                "headers": [
+                  "데이터",
+                  "역할"
+                ],
+                "wrap": true,
+                "widths": [
+                  "10rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**프랍 정의**",
+                    "프랍 종류 · 카테고리 · 배치 방식 · 부가 기능 · 색상 변형을 기획 데이터로 관리"
+                  ],
+                  [
+                    "**배치 정보**",
+                    "마이룸에 놓인 프랍 1건의 위치 · 회전 · 색상 · 연결 관계"
+                  ],
+                  [
+                    "**저장 단위**",
+                    "마이룸 1개의 배치 목록과 배경, 서버 저장 · 조회 단위"
+                  ],
+                  [
+                    "**테마 프리셋**",
+                    "기본 배치 세트, 저장된 배치가 없을 때 초기 상태로 사용"
+                  ]
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "편집 기능",
+                "headers": [
+                  "기능",
+                  "구현"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**상태 관리**",
+                    "배치 · 편집 상태별로 입력을 처리하는 상태 머신"
+                  ],
+                  [
+                    "**배치 검증**",
+                    "벽 · 바닥 레이캐스트로 배치 가능 영역 판정, 프랍 타입(바닥 · 천장 · 벽)별 규칙, 회전 스냅"
+                  ],
+                  [
+                    "**런타임 생성**",
+                    "스카이박스를 먼저 로드하고 같은 프랍은 순차 생성, 프랍 타입과 부가 기능에 따라 컴포넌트 부착"
+                  ],
+                  [
+                    "**색상 변형**",
+                    "색상 키에 따라 머티리얼 교체"
+                  ],
+                  [
+                    "**사진 액자 · 스크린**",
+                    "이미지 프랍은 업로드 URL을 저장, 화면 공유 프랍은 마이룸당 1개로 제한"
+                  ],
+                  [
+                    "**데이터 기반 UI**",
+                    "카테고리 탭과 풀링 스크롤 목록을 데이터로 구성, 썸네일은 서버에서 로드"
+                  ],
+                  [
+                    "**저장**",
+                    "저장 요청 중복 차단 → 서버 갱신 → 성공 시 참가자 갱신 요청"
+                  ]
+                ]
+              },
+              {
+                "type": "figures",
+                "items": [
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_4.webp",
+                    "caption": "마이룸 꾸미기 화면. 카테고리 탭(가구 · 장식품 · 벽걸이 · 러그 · 창문 · 배경 전망)과 가로 스크롤 목록, 파란색은 배치 가능 영역"
+                  },
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_3.webp",
+                    "caption": "꾸민 결과가 적용된 마이룸. 배치된 가구와 대형 스크린, 우하단 채팅 입력창"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "오브젝트 스폰 · 화이트보드 동기화",
+            "lead": "공간에 올리는 오브젝트는 모두 같은 스폰 흐름을 지나고, 상태는 Fusion `[Networked]` 구조체와 채널 이벤트로 전파",
+            "blocks": [
+              {
+                "type": "flow",
+                "title": "스폰 흐름",
+                "items": [
+                  "오브젝트바 · 파일 업로드 (FE)",
+                  "SpawnObjectLoader (타입별 프리뷰 · 네트워크 프리팹)",
+                  "프리뷰 (플레이어 자식, 플랫폼별 조작)",
+                  "확정 → Runner.Spawn",
+                  "FusionSpawnObjectInfoSync ([Networked] + RPC)",
+                  "늦게 입장한 클라이언트 자동 반영"
+                ]
+              },
+              {
+                "type": "table",
+                "headers": [
+                  "항목",
+                  "구현"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**타입 체계**",
+                    "Flags enum — 파일형(이미지 · 영상 · FBX · 문서(Word · PPT · PDF · Excel) · Zip · Viewless · Exe), 비파일형(공간 · 플로팅 화이트보드 · 화면 공유 · 링크 · 룰렛)"
+                  ],
+                  [
+                    "**메타데이터 동기화**",
+                    "오브젝트 식별 · 타입 · 소유자 · 링크 · 파일 정보 · 비율 등 메타데이터를 네트워크 구조체로 보관, 소유자만 RPC로 변경"
+                  ],
+                  [
+                    "**권한**",
+                    "소유자만 정보 변경, 제거 시 권한이 없으면 마스터 클라이언트가 권한을 요청한 뒤 제거"
+                  ],
+                  [
+                    "**오브젝트바**",
+                    "플랫폼(Web · Mobile) × 타입 7종 × 권한(ADMIN · USER · CONTRIBUTOR)별 SO 데이터로 버튼 구성, 접촉 시 확대보기만 노출, 모바일은 최대 6개"
+                  ],
+                  [
+                    "**화이트보드**",
+                    "SpaceWhiteBoard · FloatingWhiteBoard 2타입. 함께보기(together) · 확대(expand) 모드를 Fusion 채널 이벤트로 전파, 소유자 변경 · 닫기 프로토콜 수신, 입장한 사용자에게 진행 중 상태 전달"
+                  ]
+                ]
+              },
+              {
+                "type": "note",
+                "text": "드로잉 툴(그리기 · 지우기 · 굵기 · 색상)과 실시간 드로잉 동기화는 Unity에서 개발했으나, Unity 뷰와 웹 FE 뷰 사이의 뷰 뎁스 문제로 웹 FE로 이전. 이후 Unity는 모드 · 소유자 · 참여자 동기화를 담당"
+              }
+            ]
+          },
+          {
+            "title": "Addressables 리소스 관리",
+            "blocks": [
+              {
+                "type": "flow",
+                "title": "씬 진입 시 리소스 체인",
+                "single": true,
+                "items": [
+                  "계정 확인",
+                  "다운로드 크기 확인",
+                  "의존성 다운로드 (진행률 합산)",
+                  "타입별 프리로드",
+                  "씬 진입"
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "Addressables 구성",
+                "headers": [
+                  "항목",
+                  "내용"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**그룹 · 레이블**",
+                    "리소스 타입별 그룹, 씬별 프리로드 레이블, 콘텐츠(미니게임)별 레이블"
+                  ],
+                  [
+                    "**다운로드 체인**",
+                    "리소스 타입별 핸들러를 연결해 크기 확인을 먼저 끝낸 뒤 다운로드 수 기준으로 진행률 통합"
+                  ],
+                  [
+                    "**프리로드 사전**",
+                    "레이블 교집합으로 키를 조회해 핸들을 보관, 씬이 바뀌면 새 목록에 없는 같은 타입 자산을 해제하고 이미 있는 키는 재사용"
+                  ],
+                  [
+                    "**씬**",
+                    "레벨 씬을 Addressables Additive로 로드 · 언로드, 오픈월드는 분할 씬 구성"
+                  ],
+                  [
+                    "**프로필**",
+                    "서버별 프로필의 로드 경로에 환경 · 버전을 바인딩, 빌드 시 서버별 카탈로그 생성 (Jenkins 항목 참고)"
+                  ]
+                ]
+              }
+            ]
+          },
+          {
+            "title": "미니게임 Rivor",
+            "lead": "Rfice 안에서 개발하던 서바이벌 미니게임이 별도 프로젝트(Rivor)로 분리되어 진행. 아래는 개발한 게임 룰 4종과 공통 구조",
+            "blocks": [
+              {
+                "type": "table",
+                "caption": "개발한 게임 룰",
+                "headers": [
+                  "룰",
+                  "내용",
+                  "구현"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null,
+                  null
+                ],
+                "rows": [
+                  [
+                    "**DeathRoll**",
+                    "회전하는 원통 위 플랫폼에서 시간이 끝날 때까지 생존, 시간에 따라 회전 속도 상승, 장애물 5종(전기 기둥 · 넉백 · 회전 벽 · 촉수 · 트램펄린)",
+                    "클라이언트 룰 · 플랫폼 스포너 · 장애물, 룰 서버(플랫폼 프리셋 · 속도 단계), 플랫폼 정보 SO"
+                  ],
+                  [
+                    "**HyperBoard**",
+                    "가속하며 전진하는 보드 위에서 밟은 타일이 사라지는 생존 룰, 뒤에서 블랙홀이 전진하며 장애물 구간 제거",
+                    "보드 · 블랙홀 컨트롤러, 밟은 타일 인덱스 전송 → 서버 소멸 판정 → 전체 동기화"
+                  ],
+                  [
+                    "**HyperBoardTeam**",
+                    "HyperBoard를 팀 전으로 확장, 왕관 점령으로 게임 종료",
+                    "팀 룰 · 왕관 오브젝트, 점령 메시지, 점령자 기준 종료 처리"
+                  ],
+                  [
+                    "**StairRun**",
+                    "계단 코스에서 장애물을 피해 끝까지 생존하는 룰",
+                    "룰 · 레벨 · 장애물 핸들러, 서버에서 스폰 지점 셔플 후 전달"
+                  ]
+                ]
+              },
+              {
+                "type": "figures",
+                "wide": true,
+                "items": [
+                  {
+                    "src": "data/Images/Projects/Rfice/12. Rivor Architecture.webp",
+                    "caption": "Rivor 구조. 클라이언트 · 룰 서버 모듈이 공용 메시지 채널 계약으로 통신하고, Fusion · Rfice 어댑터가 전송과 룸 연결을 담당"
+                  }
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "공통 구조",
+                "headers": [
+                  "항목",
+                  "내용"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**룰 계층**",
+                    "클라이언트 룰 · 서버 룰 · Fusion 룰 서버로 분리, 룰별 SetupArgs로 초기 상태 전달"
+                  ],
+                  [
+                    "**메시지**",
+                    "룰별 Client · Server 이벤트 채널로 사망 · 남은 인원 · 타일 소멸 · 점령 이벤트 전달"
+                  ],
+                  [
+                    "**진행**",
+                    "카운트다운 → 플레이 → 종료 상태 전환, 사망 처리와 관전 카메라, 플레이 시간과 남은 인원 동기화"
+                  ]
+                ]
+              },
+              {
+                "type": "figures",
+                "items": [
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_6.webp",
+                    "caption": "DeathRoll. 회전하는 롤 위에서 시간이 끝날 때까지 생존하는 룰, 상단에 미션 안내 · 남은 인원 · 타이머 HUD"
+                  },
+                  {
+                    "src": "data/Images/Projects/Rfice/Thumbnail_8.webp",
+                    "caption": "HyperBoard. 타일 위에서 장애물(촉수 · 벽)을 피해 끝까지 생존하는 룰"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "문제 처리와 회고",
+            "blocks": [
+              {
+                "type": "cases",
+                "items": [
+                  {
+                    "tag": "구조 변경",
+                    "title": "화이트보드 드로잉을 Unity에서 웹 FE로 이전",
+                    "rows": [
+                      {
+                        "label": "상황",
+                        "text": "Unity에서 개발한 드로잉 화이트보드가 Unity 뷰와 웹 FE 뷰 사이의 뷰 뎁스 문제를 가짐"
+                      },
+                      {
+                        "label": "처리",
+                        "text": "드로잉 기능을 웹 FE로 이전하고 Unity는 함께보기 · 확대 모드, 소유자, 참여자 상태 동기화를 유지"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "동기화",
+                    "title": "늦게 입장한 사용자에게 함께보기 · 화이트보드 상태 전달",
+                    "rows": [
+                      {
+                        "label": "상황",
+                        "text": "함께보기나 화이트보드가 진행 중일 때 입장한 사용자는 현재 상태를 받을 경로가 없음"
+                      },
+                      {
+                        "label": "처리",
+                        "text": "입장 이벤트에서 진행 중인 함께보기 · 화이트보드 정보(소유자 · 파일 · 화면 ID)를 해당 사용자에게만 채널 이벤트로 전송"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "권한",
+                    "title": "소유자가 없는 네트워크 오브젝트 제거",
+                    "rows": [
+                      {
+                        "label": "상황",
+                        "text": "Shared Mode에서 StateAuthority가 없는 클라이언트는 오브젝트를 Despawn할 수 없음"
+                      },
+                      {
+                        "label": "처리",
+                        "text": "마스터 클라이언트가 권한을 요청해 획득한 뒤 Despawn, 그 외 클라이언트는 중단"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "리소스",
+                    "title": "씬 전환 시 프리로드 자산 정리",
+                    "rows": [
+                      {
+                        "label": "상황",
+                        "text": "씬마다 Preload 레이블이 달라 이전 씬 자산이 메모리에 남을 수 있음"
+                      },
+                      {
+                        "label": "처리",
+                        "text": "새 Preload 키 목록에 없는 같은 타입 자산을 Release하고 이미 로드된 키는 사전에서 재사용"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "데이터",
+                    "title": "테마 프리셋 저장 시 배치 ID 충돌",
+                    "rows": [
+                      {
+                        "label": "상황",
+                        "text": "배치 ID가 `프랍ID_yyMMddHHmmss`라 같은 초에 저장되는 동일 프랍끼리 충돌"
+                      },
+                      {
+                        "label": "처리",
+                        "text": "테마 저장 도구에서 중복이면 마지막 숫자를 +1 해 ID 분리"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "cards",
+                "columns": 2,
+                "items": [
+                  {
+                    "tag": "잘한 점",
+                    "bullets": [
+                      "프랍 정의 · 색상 · 테마를 JSON → SO 데이터로 두어 프랍 추가 시 코드 수정 없음",
+                      "오브젝트바 기능을 플랫폼 · 타입 · 권한별 SO 데이터로 구성해 분기 코드 최소화",
+                      "리소스 다운로드를 책임 연쇄로 묶어 진행률과 오류 코드를 한 곳에서 처리"
+                    ]
+                  },
+                  {
+                    "tag": "아쉬운 점",
+                    "bullets": [
+                      "플랫폼 분기가 `#if`로 여러 파일에 흩어져 있어 새 플랫폼 추가 시 수정 범위가 큼",
+                      "드로잉 모듈 제거 후 주석 처리된 호출부와 TODO가 코드에 남아 있음"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "table",
+                "caption": "배운 점",
+                "headers": [
+                  "영역",
+                  "배운 것"
+                ],
+                "wrap": true,
+                "widths": [
+                  "9rem",
+                  null
+                ],
+                "rows": [
+                  [
+                    "**구조 설계**",
+                    "규모가 컸던 화이트보드 드로잉 기능을 Unity와 웹 FE의 뷰 구조 문제로 제거하게 되면서, 기능 구현에 앞서 뷰 · 계층 · 책임 경계를 먼저 설계하는 일이 중요하다고 체감"
+                  ],
+                  [
+                    "**네트워크**",
+                    "Shared Mode에서는 '누가 쓰는가'(InputAuthority · StateAuthority)를 먼저 정하고, 늦게 들어온 사용자가 받을 상태를 `[Networked]`에 둘지 이벤트로 보낼지 구분"
+                  ],
+                  [
+                    "**데이터**",
+                    "기획이 늘리는 데이터는 enum + SO로 받고, 동작 차이는 컴포넌트 부착으로 흡수하면 콘텐츠 확장이 코드와 분리됨"
+                  ],
+                  [
+                    "**멀티플랫폼**",
+                    "WebGL · 모바일 차이는 입력과 UI 레이아웃에 집중되므로 컨트롤러 · 프리팹 단위로 교체 가능하게 두는 편이 `#if` 분기보다 유지보수에 유리"
+                  ]
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Rfice_Old",
+      "hidden": true,
       "description": "채팅·음성·화상·협업을 3D 가상 공간에 통합한 메신저 기반의 메타버스 프로젝트",
       "platform": "PC / Mobile / WebGL",
       "techs": ["Unity", "WebGL", "Android", "iOS"],
       "image": "data/Images/Projects/Rfice/Logo-640.webp",
-      "links": [
-        { "title": "홈페이지", "url": "https://www.rfice.com/ko/" }
-      ],
+      "links": [],
       "details": {
         "company": "알서포트",
         "period": "2022.02 - 2025.12.31",
