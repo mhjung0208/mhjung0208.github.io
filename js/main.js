@@ -106,7 +106,7 @@ function renderHero(hero, experience, contact, career) {
 
         <dl class="hero-facts">
           ${careerHtml ? `<div><dt>경력</dt><dd>${career.label ? `<p class="hero-career-total">총 경력 <strong>${escapeHtml(career.label)}</strong></p>` : ''}<ul class="hero-inline-list">${careerHtml}</ul></dd></div>` : ''}
-          ${contact?.email ? `<div><dt>연락처</dt><dd><a class="text-link" href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a></dd></div>` : ''}
+          ${contact?.email ? `<div><dt>이메일</dt><dd><a class="text-link" href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a></dd></div>` : ''}
         </dl>
       </div>
       ${imageHtml}
