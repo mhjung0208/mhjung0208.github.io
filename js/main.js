@@ -308,24 +308,19 @@ function openProjectModal(proj) {
     .map(t => `<li>${escapeHtml(t)}</li>`)
     .join('');
 
+  const linkItemsHtml = (proj.links || [])
+    .map(link => `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="text-link break-all">${escapeHtml(link.title)}</a>`)
+    .join('<span class="modal-link-sep" aria-hidden="true">·</span>');
+
   const propertiesHtml = `
     <dl class="modal-props">
       ${d.company ? `<div><dt>소속</dt><dd>${escapeHtml(d.company)}</dd></div>` : ''}
       ${d.period ? `<div><dt>기간</dt><dd class="tabular-nums">${escapeHtml(d.period)}</dd></div>` : ''}
       ${d.role ? `<div><dt>역할</dt><dd>${escapeHtml(d.role)}</dd></div>` : ''}
       <div><dt>기술</dt><dd><ul class="tag-list tag-list-sm">${techTagsHtml}</ul></dd></div>
+      ${linkItemsHtml ? `<div><dt>링크</dt><dd class="modal-links">${linkItemsHtml}</dd></div>` : ''}
     </dl>
   `;
-
-  const linksSection = (proj.links || []).length ? `
-    <div class="notion-section mb-8">
-      <h3 class="modal-subtitle">관련 링크</h3>
-      <ul class="space-y-1.5">
-        ${proj.links.map(link => `
-          <li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="text-link break-all">${escapeHtml(link.title)}</a></li>
-        `).join('')}
-      </ul>
-    </div>` : '';
 
   const introItems = d.intro || [];
   const galleryImages = ((d.images || []).length ? d.images : (proj.image ? [proj.image] : [])).map(toLargeSrc);
@@ -354,13 +349,12 @@ function openProjectModal(proj) {
   const showcase = proj.showcase;
   const modalWidthClass = caseStudy || showcase ? 'max-w-4xl' : 'max-w-3xl';
   const bodyHtml = showcase
-    ? imageSection + renderShowcase(showcase) + linksSection
+    ? imageSection + renderShowcase(showcase)
     : caseStudy
-      ? renderCaseStudy(caseStudy, galleryImages, proj.name) + linksSection
+      ? renderCaseStudy(caseStudy, galleryImages, proj.name)
       : `${imageSection}
           ${introSection}
-          ${featuresSection}
-          ${linksSection}`;
+          ${featuresSection}`;
 
   const container = document.getElementById('project-modal');
   container.innerHTML = `

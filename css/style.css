@@ -1826,3 +1826,15 @@ hr + .cs-section .cs-section-title,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* 속성 목록의 링크 행 */
+.modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  align-items: baseline;
+}
+
+.modal-link-sep {
+  color: var(--ink-faint, #9a8f85);
+}
