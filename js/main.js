@@ -149,32 +149,27 @@ function renderSkills(skills) {
   document.getElementById('skills-content').innerHTML = `<dl class="skill-groups">${groupsHtml}</dl>`;
 }
 
-function calcWorkDuration(period) {
-  const parts = period.split(' - ');
-  if (parts.length !== 2) return '';
-  const parseDate = s => { const [y, m, d] = s.split('.').map(Number); return new Date(y, m - 1, d || 1); };
-  const start = parseDate(parts[0]);
-  const end = parseDate(parts[1]);
-  let years = end.getFullYear() - start.getFullYear();
-  let months = end.getMonth() - start.getMonth();
-  if (months < 0) { years--; months += 12; }
-  const result = [];
-  if (years > 0) result.push(`${years}년`);
-  if (months > 0) result.push(`${months}개월`);
-  return result.length ? `(${result.join(' ')})` : '';
-}
-
-// calcWorkDuration 과 같은 규칙으로 개월 수만 돌려준다 (경력 합계 계산용)
+// 입사 월과 퇴사 월을 모두 한 달로 세는 개월 수 (경력증명서 방식)
 function calcWorkMonths(period) {
   const parts = period.split(' - ');
   if (parts.length !== 2) return 0;
   const parseDate = s => { const [y, m, d] = s.split('.').map(Number); return new Date(y, m - 1, d || 1); };
   const start = parseDate(parts[0]);
   const end = parseDate(parts[1]);
-  return (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  return (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
 }
 
-// 재직 기간 합계 → { months: 105, label: "8년 9개월" }
+function calcWorkDuration(period) {
+  const total = calcWorkMonths(period);
+  const years = Math.floor(total / 12);
+  const months = total % 12;
+  const result = [];
+  if (years > 0) result.push(`${years}년`);
+  if (months > 0) result.push(`${months}개월`);
+  return result.length ? `(${result.join(' ')})` : '';
+}
+
+// 재직 기간 합계 → { months: 107, label: "8년 11개월" }
 function calcTotalCareer(experience) {
   const months = (experience || []).reduce((sum, exp) => sum + calcWorkMonths(exp.period), 0);
   const y = Math.floor(months / 12);

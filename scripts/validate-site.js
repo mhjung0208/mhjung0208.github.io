@@ -83,11 +83,11 @@ function checkData() {
   checkCareerLabel(data);
 }
 
-// main.js calcWorkMonths 와 같은 규칙: 연·월 차이만 센다
+// main.js calcWorkMonths 와 같은 규칙: 입사 월과 퇴사 월을 모두 한 달로 센다
 function workMonths(period) {
   const [start, end] = String(period || '').split(' - ').map((s) => s.split('.').map(Number));
   if (!start || !end) return 0;
-  return (end[0] - start[0]) * 12 + (end[1] - start[1]);
+  return (end[0] - start[0]) * 12 + (end[1] - start[1]) + 1;
 }
 
 // 정적 메타(index.html, resume.json meta)의 경력 표기가 재직 기간 합계와 같은지 확인한다
