@@ -21,7 +21,7 @@ function renderAll(data) {
   const career = calcTotalCareer(data.experience);
   renderMeta(data.meta, data.hero);
   renderHero(data.hero, data.experience, data.contact, career);
-  renderAbout(data.about, career);
+  renderAbout(data.about);
   renderSkills(data.skills);
   renderExperience(data.experience);
   renderProjects(data.projects);
@@ -72,14 +72,14 @@ function renderMeta(meta, hero) {
   document.getElementById('nav-logo').textContent = `${hero.name} 포트폴리오`;
 }
 
-// "2017.02.13 - 2022.01.22" → { start: 2017, end: 2022 }
+// "2017.02.13 - 2022.01.22" → { start: "2017.02", end: "2022.01" }
 function periodYears(period) {
   const [start, end] = String(period || '').split(' - ');
-  return { start: (start || '').slice(0, 4), end: (end || '').slice(0, 4) };
+  return { start: (start || '').slice(0, 7), end: (end || '').slice(0, 7) };
 }
 
 function renderHero(hero, experience, contact, career) {
-  // 재직 이력: 회사명과 연도만 짧게
+  // 재직 이력: 회사명과 연월만 짧게
   const careerHtml = (experience || []).map(exp => {
     const y = periodYears(exp.period);
     return `<li><span class="text-gray-900 font-medium">${escapeHtml(exp.company)}</span> <span class="hero-years">${escapeHtml(y.start)}–${escapeHtml(y.end)}</span></li>`;
@@ -91,7 +91,7 @@ function renderHero(hero, experience, contact, career) {
   const imageHtml = hero.profileImage ? `
     <div class="hero-figure">
       <img ${responsiveImgAttrs(hero.profileImage, '(min-width: 1024px) 34vw, 60vw')}${sizeAttrs}
-           alt="노트북으로 Unity 작업을 하는 ${escapeHtml(hero.name)} 일러스트" loading="eager" fetchpriority="high" decoding="async">
+           alt="${escapeHtml(hero.name)} 증명사진" loading="eager" fetchpriority="high" decoding="async">
     </div>` : '';
 
   document.getElementById('hero-content').innerHTML = `
@@ -99,6 +99,7 @@ function renderHero(hero, experience, contact, career) {
       <div class="hero-text fade-in">
         <h1 class="hero-name">${escapeHtml(hero.name)}</h1>
         <p class="hero-role">${escapeHtml(roleLine)}</p>
+        ${hero.summary ? `<p class="hero-summary">${escapeHtml(hero.summary)}</p>` : ''}
 
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
@@ -114,24 +115,21 @@ function renderHero(hero, experience, contact, career) {
   `;
 }
 
-function renderAbout(about, career) {
-  // 하이라이트 문구의 {career} 는 재직 기간 합계("8년 9개월")로 바꾼다
-  const highlightsHtml = about.highlights
-    .map(h => `<li>${escapeHtml(String(h).replace('{career}', career.label))}</li>`)
-    .join('');
-
-  const profileImageHtml = about.profileImage
-    ? `<img src="${escapeHtml(about.profileImage)}" alt="정민화 증명사진" width="160" height="200" class="about-photo" loading="lazy" decoding="async">`
-    : '';
+function renderAbout(about) {
+  // 담당 기능 표 (소개 문구·경력·연락처는 hero가 담당)
+  const domainsHtml = (about.domains || []).map(d => `
+    <tr>
+      <th scope="row">${escapeHtml(d.area)}</th>
+      <td>${escapeHtml(d.detail)}</td>
+      <td class="about-domain-projects">${(d.projects || []).map(escapeHtml).join(' · ')}</td>
+    </tr>`).join('');
 
   document.getElementById('about-content').innerHTML = `
-    <div class="about-grid">
-      ${profileImageHtml}
-      <div>
-        <p class="about-text">${about.description}</p>
-        <ul class="about-highlights">${highlightsHtml}</ul>
-      </div>
-    </div>
+    <table class="about-domains">
+      <caption class="sr-only">담당 영역</caption>
+      <thead><tr><th scope="col">기능</th><th scope="col">내용</th><th scope="col">프로젝트</th></tr></thead>
+      <tbody>${domainsHtml}</tbody>
+    </table>
   `;
 }
 

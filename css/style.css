@@ -210,7 +210,7 @@ section {
 
 .hero-figure {
   justify-self: center;
-  width: min(100%, 22rem);
+  width: min(100%, 16.5rem);
 }
 
 .hero-figure img {
@@ -222,7 +222,7 @@ section {
 @media (min-width: 1024px) {
   .hero-figure {
     justify-self: end;
-    width: 100%;
+    width: 75%;
   }
 }
 
@@ -237,7 +237,7 @@ section {
   }
 
   .hero-figure {
-    width: min(70%, 16rem);
+    width: min(52.5%, 12rem);
   }
 }
 
@@ -340,48 +340,74 @@ section {
   border: 1px solid var(--rule);
 }
 
-/* ── 소개 ── */
-.about-grid {
-  display: grid;
-  gap: 1.75rem;
-  align-items: start;
+/* ── 소개: 포지셔닝 한 줄 + 일하는 방식 카드 + 담당 영역 표 ── */
+.about-domains {
+  margin-top: 2rem;
+  width: 100%;
+  border-top: 1px solid var(--rule);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-@media (min-width: 768px) {
-  .about-grid {
-    grid-template-columns: 10rem minmax(0, 1fr);
-    gap: 2.5rem;
-  }
+.about-domains th,
+.about-domains td {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
 }
 
-.about-photo {
-  width: 10rem;
-  height: 12.5rem;
-  object-fit: cover;
-  border-radius: 0.5rem;
+.about-domains thead th {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
 }
 
-.about-text {
-  font-size: 1.125rem;
-  line-height: 1.8;
+.about-domains tbody th {
+  width: 9rem;
+  padding-right: 1rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.about-domains td {
   color: var(--ink-2);
-  max-width: 40rem;
 }
 
-.about-highlights {
-  margin-top: 1.5rem;
-  display: grid;
-  gap: 0.5rem 2rem;
-  max-width: 40rem;
+.about-domains thead th:last-child,
+.about-domains .about-domain-projects {
+  width: 15rem;
+  padding-left: 1rem;
+  color: var(--muted);
 }
 
-@media (min-width: 640px) {
-  .about-highlights {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+/* 모바일: 표 행을 세로 블록으로 */
+@media (max-width: 639px) {
+  .about-domains thead {
+    display: none;
+  }
+
+  .about-domains tr {
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .about-domains th,
+  .about-domains td {
+    display: block;
+    width: auto;
+    padding: 0;
+    border: 0;
+  }
+
+  .about-domains .about-domain-projects {
+    margin-top: 0.3rem;
+    padding-left: 0;
+    font-size: 0.85rem;
   }
 }
 
-.about-highlights li,
 .exp-highlights li {
   position: relative;
   padding-left: 1rem;
@@ -390,7 +416,6 @@ section {
   color: var(--ink-2);
 }
 
-.about-highlights li::before,
 .exp-highlights li::before {
   content: '';
   position: absolute;
